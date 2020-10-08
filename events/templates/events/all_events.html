@@ -1,0 +1,15 @@
+<h1>All Events</h1>
+
+{% if all_events %}
+    <ul>
+    {% for event in all_events %}
+        <li>
+            <p>Title: {{ event.title }}</p>
+            <p>{{ event.description }}</p>
+            <p>{{ event.created_at }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No events.</p>
+{% endif %}

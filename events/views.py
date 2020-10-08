@@ -7,9 +7,16 @@ from .models import Event
 
 def events(request):
     all_events = Event.objects.all()
-    return HttpResponse('Events page')
+    return render(request, 'events/all_events.html', {'all_events': all_events})
 
 
 def events_by_category(request, category):
-    events_by_category = Event.objects.filter(category=category)
-    return HttpResponse('Event ' + category)
+    events_in_category = Event.objects.filter(category=category)
+    return render(
+        request,
+        'events/events_by_category.html',
+        {
+            'events_in_category': events_in_category,
+            'category': category,
+        }
+    )
