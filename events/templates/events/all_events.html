@@ -1,3 +1,6 @@
+{% extends 'events/main.html' %}
+{% block content %}
+
 <h1>All Events</h1>
 
 {% if all_events %}
@@ -13,3 +16,5 @@
 {% else %}
     <p>No events.</p>
 {% endif %}
+
+{% endblock %}

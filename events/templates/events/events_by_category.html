@@ -1,3 +1,6 @@
+{% extends 'events/main.html' %}
+{% block content %}
+
 <h1>Category {{ category }}</h1>
 {% if events_in_category %}
     <ul>
@@ -11,3 +14,5 @@
 {% else %}
     <p>No events in this category.</p>
 {% endif %}
+
+{% endblock %}
