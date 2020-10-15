@@ -2,7 +2,14 @@
 {% block content %}
 
     <div class="container">
-        <h1>New Event</h1>
+        <h1>Create new event</h1>
+        <form action='{% url 'events:new' %}' method="post" class="form-group">
+            {% csrf_token %}
+            {{ event_form.as_p }}
+            <button class="btn btn-success d-inline" type="submit"> Save </button>
+            <a class="btn btn-danger float-right d-inline" href="{% url 'events:feed' %}"> Back </a>
+        </form>
+
     </div>
 
 {% endblock %}
