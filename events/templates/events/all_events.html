@@ -1,20 +1,24 @@
 {% extends 'events/main.html' %}
 {% block content %}
 
-<h1>All Events</h1>
-
-{% if all_events %}
-    <ul>
-    {% for event in all_events %}
-        <li>
-            <p>Title: {{ event.title }}</p>
-            <p>{{ event.description }}</p>
-            <p>{{ event.created_at }}</p>
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No events.</p>
-{% endif %}
+    <div class="container mt-4">
+        <h1 class="mr-auto d-inline">All Events</h1>
+        <a class="btn btn-success float-right d-inline" href="{% url 'events:new' %}">+ New Event</a>
+        <div class="row mt-4">
+            {% if all_events %}
+                {% for event in all_events %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <p>Title: {{ event.title }}</p>
+                            <p>{{ event.description }}</p>
+                            <p>{{ event.created_at }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No events.</p>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}

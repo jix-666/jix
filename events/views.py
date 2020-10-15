@@ -20,3 +20,7 @@ def events_by_category(request, category):
             'category': category,
         }
     )
+
+
+def new_event(request):
+    return render(request, 'events/new_event.html')
