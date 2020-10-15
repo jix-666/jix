@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from .models import Event
 from .forms import EventForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -32,6 +32,8 @@ def new_event(request):
                           appointment_date=request.POST['appointment_date'],
                           image_url=request.POST['image_url'])
             event.save()
+            messages.success(request, f'{event.title} is created.')
+            return redirect('events:feed')
     else:
         event_form = EventForm()
     return render(request, 'events/new_event.html', {'event_form': event_form})
