@@ -20,10 +20,12 @@
                     <div class="col-md-4">
                          <div class="card my-3">
                             <a href="">
-                                <img class="card-img-top" src="{{ event.image_url }}" alt="Card image">
-                                <p class="card-title">Title: {{ event.title }}</p>
+                                <img class="card-img-top" src="{{ event.image_url }}" alt="{{ event.title }}">
+                                <h5 class="card-title">Title: {{ event.title }}</h5>
                                 <p class="card-text">{{ event.description }}</p>
-                                <p>{{ event.appointment_date }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">{{ event.appointment_date }}</small>
+                                </p>
                             </a>
                         </div>
                     </div>
