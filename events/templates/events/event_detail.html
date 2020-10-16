@@ -6,5 +6,6 @@
     <p>
         {{ event.title }} 
     </p>
+    <a class="btn btn-danger" href="{% url 'events:delete_event' event.category event.slug %}">Delete</a>
 </div>
 {% endblock %}
