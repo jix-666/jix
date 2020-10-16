@@ -14,7 +14,7 @@
         {% endif %}
         <div class="row">
             <div class="col-3">
-                {% include 'events/sidenav.html' %}
+                {% include 'components/sidenav.html' %}
             </div>
             <div class="col-9">
                 <h1 class="d-inline">All Events</h1>
@@ -23,7 +23,7 @@
                     {% if all_events %}
                         {% for event in all_events %}
                             <div class="col-md-4">
-                                {% include 'events/event_card.html' %}
+                                {% include 'components/event_card.html' %}
                             </div>
                         {% endfor %}
                     {% else %}
