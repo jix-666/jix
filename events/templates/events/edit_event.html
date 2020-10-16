@@ -1,0 +1,14 @@
+{% extends 'events/main.html' %}
+{% block content %}
+
+    <div class="container">
+        <h1>Edit event</h1>
+        <form
+                action='{% url 'events:edit_event' event.category event.slug %}'
+                method="post"
+                class="form-group">
+            {% include 'components/event_form.html' %}
+        </form>
+    </div>
+
+{% endblock %}

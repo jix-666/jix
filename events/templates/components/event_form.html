@@ -1,0 +1,8 @@
+{% csrf_token %}
+{{ event_form.as_p }}
+<button
+        class="btn btn-success d-inline"
+        type="submit">{% if is_edit_mode %}Update{% else %}Save{% endif %}</button>
+<a
+        class="btn btn-danger float-right d-inline"
+        href="{% url 'events:feed' %}">Back</a>
