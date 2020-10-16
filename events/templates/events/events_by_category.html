@@ -1,18 +1,27 @@
 {% extends 'events/main.html' %}
 {% block content %}
 
-<h1>Category {{ category }}</h1>
-{% if events_in_category %}
-    <ul>
-    {% for event in events_in_category %}
-         <li>
-            <p>{{ event.title }}</p>
-            <p>{{ event.description }}</p>
-         </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No events in this category.</p>
-{% endif %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-3">
+                {% include 'components/sidenav.html' %}
+            </div>
+            <div class="col-9">
+                <h1 class="d-inline">{{ category | capfirst }}</h1>
+                <a class="btn btn-success float-right d-inline" href="{% url 'events:new' %}">+ New Event</a>
+                <div class="row mt-4">
+                    {% if events_in_category %}
+                        {% for event in events_in_category %}
+                            <div class="col-md-4">
+                                {% include 'components/event_card.html' %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No events in this category.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
