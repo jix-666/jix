@@ -1,18 +1,27 @@
 {% extends 'events/main.html' %}
 {% block content %}
 
-<h1>Category {{ category }}</h1>
-{% if events_in_category %}
-    <ul>
-    {% for event in events_in_category %}
-         <li>
-            <p>{{ event.title }}</p>
-            <p>{{ event.description }}</p>
-         </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No events in this category.</p>
-{% endif %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-3">
+                {% include 'events/sidenav.html' %}
+            </div>
+            <div class="col-9">
+                <h1>{{ category | capfirst }}</h1>
+                {% if events_in_category %}
+                    <ul>
+                        {% for event in events_in_category %}
+                            <li>
+                                <p>{{ event.title }}</p>
+                                <p>{{ event.description }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No events in this category.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

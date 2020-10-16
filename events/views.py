@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
-from .models import Event
-from .forms import EventForm
 from django.contrib import messages
+from django.shortcuts import render, redirect
+
+from .forms import EventForm
+from .models import Event
 
 
 # Create your views here.
@@ -9,7 +10,7 @@ from django.contrib import messages
 
 def events(request):
     all_events = Event.objects.all()
-    return render(request, 'events/all_events.html', {'all_events': all_events})
+    return render(request, 'events/all_events.html', {'all_events': all_events, 'all_events_active': True})
 
 
 def events_by_category(request, category):

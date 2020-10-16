@@ -12,27 +12,34 @@
                 </div>
             {% endfor %}
         {% endif %}
-        <h1 class="mr-auto d-inline">All Events</h1>
-        <a class="btn btn-success float-right d-inline" href="{% url 'events:new' %}">+ New Event</a>
-        <div class="row mt-4">
-            {% if all_events %}
-                {% for event in all_events %}
-                    <div class="col-md-4">
-                         <div class="card my-3">
-                            <a href="" style="text-decoration: none">
-                                <img class="card-img-top" src="{{ event.image_url }}" alt="{{ event.title }}">
-                                <h5 class="card-title">Title: {{ event.title }}</h5>
-                                <p class="card-text">{{ event.description }}</p>
-                                <p class="card-text">
-                                    <small class="text-muted">{{ event.appointment_date }}</small>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>No events.</p>
-            {% endif %}
+        <div class="row">
+            <div class="col-3">
+                {% include 'events/sidenav.html' %}
+            </div>
+            <div class="col-9">
+                <h1 class="mr-auto d-inline">All Events</h1>
+                <a class="btn btn-success float-right d-inline" href="{% url 'events:new' %}">+ New Event</a>
+                <div class="row mt-4">
+                    {% if all_events %}
+                        {% for event in all_events %}
+                            <div class="col-md-4">
+                                <div class="card my-3">
+                                    <a href="" style="text-decoration: none">
+                                        <img class="card-img-top" src="{{ event.image_url }}" alt="{{ event.title }}">
+                                        <h5 class="card-title">Title: {{ event.title }}</h5>
+                                        <p class="card-text">{{ event.description }}</p>
+                                        <p class="card-text">
+                                            <small class="text-muted">{{ event.appointment_date }}</small>
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No events.</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 
