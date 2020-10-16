@@ -41,5 +41,12 @@ def new_event(request):
 
 
 def event_detail(request, event_category, event_slug):
-    event = Event.objects.get(slug=event_slug)
+    event = Event.objects.get(slug=event_slug, category=event_category)
     return render(request, 'events/event_detail.html', {'event': event})
+
+
+def delete_event(request,event_category, event_slug):
+    event = Event.objects.get(slug=event_slug, category=event_category)
+    event.delete()
+    return redirect('events:feed')
+
