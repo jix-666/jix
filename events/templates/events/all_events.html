@@ -20,9 +20,12 @@
                 {% for event in all_events %}
                     <div class="col-md-4">
                         <div class="card">
-                            <p>Title: {{ event.title }}</p>
-                            <p>{{ event.description }}</p>
-                            <p>{{ event.created_at }}</p>
+                            <a href="">
+                                <img class="card-img-top" src="{{ event.image_url }}" alt="Card image">
+                                <p class="card-title">Title: {{ event.title }}</p>
+                                <p class="card-text">{{ event.description }}</p>
+                                <p>{{ event.appointment_date }}</p>
+                            </a>
                         </div>
                     </div>
                 {% endfor %}
