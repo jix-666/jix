@@ -10,19 +10,18 @@ from .models import Event
 
 def events(request):
     all_events = Event.objects.all()
-    return render(request, 'events/all_events.html', {'all_events': all_events, 'all_events_active': True})
+    return render(request, 'events/all_events.html', {
+        'all_events': all_events,
+        'all_events_active': True
+    })
 
 
 def events_by_category(request, event_category):
     events_in_category = Event.objects.filter(category=event_category)
-    return render(
-        request,
-        'events/events_by_category.html',
-        {
-            'events_in_category': events_in_category,
-            'category': event_category,
-        }
-    )
+    return render(request, 'events/events_by_category.html', {
+        'events_in_category': events_in_category,
+        'category': event_category,
+    })
 
 
 def new_event(request):
@@ -37,7 +36,10 @@ def new_event(request):
             return redirect('events:feed')
     else:
         event_form = EventForm()
-    return render(request, 'events/new_event.html', {'event_form': event_form})
+    return render(request, 'events/new_event.html', {
+        'event_form': event_form,
+        'is_edit_mode': False
+    })
 
 
 def event_detail(request, event_category, event_slug):
@@ -45,8 +47,31 @@ def event_detail(request, event_category, event_slug):
     return render(request, 'events/event_detail.html', {'event': event})
 
 
-def delete_event(request,event_category, event_slug):
+def edit_event(request, event_category, event_slug):
+    event = Event.objects.get(slug=event_slug, category=event_category)
+    event_form = EventForm(initial={
+        'title': event.title,
+        'description': event.description,
+        'category': event.category,
+        'appointment_date': event.appointment_date,
+        'image_url': event.image_url
+    })
+    if request.method == 'POST':
+        event.title = request.POST['title']
+        event.description = request.POST['description']
+        event.category = request.POST['category']
+        event.appointment_date = request.POST['appointment_date']
+        event.image_url = request.POST['image_url']
+        event.save()
+        return redirect('events:feed')
+    return render(request, 'events/edit_event.html', {
+        'event_form': event_form,
+        'event': event,
+        'is_edit_mode': True
+    })
+
+
+def delete_event(request, event_category, event_slug):
     event = Event.objects.get(slug=event_slug, category=event_category)
     event.delete()
     return redirect('events:feed')
-
