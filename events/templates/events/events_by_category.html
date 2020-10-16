@@ -7,19 +7,19 @@
                 {% include 'events/sidenav.html' %}
             </div>
             <div class="col-9">
-                <h1>{{ category | capfirst }}</h1>
-                {% if events_in_category %}
-                    <ul>
+                <h1 class="d-inline">{{ category | capfirst }}</h1>
+                <a class="btn btn-success float-right d-inline" href="{% url 'events:new' %}">+ New Event</a>
+                <div class="row mt-4">
+                    {% if events_in_category %}
                         {% for event in events_in_category %}
-                            <li>
-                                <p>{{ event.title }}</p>
-                                <p>{{ event.description }}</p>
-                            </li>
+                            <div class="col-md-4">
+                                {% include 'events/event_card.html' %}
+                            </div>
                         {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No events in this category.</p>
-                {% endif %}
+                    {% else %}
+                        <p>No events in this category.</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
