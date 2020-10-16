@@ -3,8 +3,12 @@
 
     <div class="container">
         <p>
-            {{ event.title }}
-        </p>
+            <h1> {{ event.title }} </h1>
+            <img src="{{ event.image_url }}" alt="{{ event.title }}" width="700" class="my-5">
+            <p> {{ event.description }} </p>
+            <p >Created at: {{ event.created_at }} </p>
+            <p>Appointment date: {{ event.appointment_date }}</p>
+
         <a class="btn btn-success" href="{% url 'events:edit_event' event.category event.slug %}">Edit</a>
         <a class="btn btn-danger" href="{% url 'events:delete_event' event.category event.slug %}">Delete</a>
     </div>
