@@ -1,0 +1,14 @@
+<div class="card p-3">
+    <h3 class="mb-3">Category</h3>
+    <div class="list-group">
+        <a
+                href="{% url 'events:events_by_category' 'eating' %}"
+                class="list-group-item list-group-item-action">Eating</a>
+        <a
+                href="{% url 'events:events_by_category' 'sport' %}"
+                class="list-group-item list-group-item-action">Sport</a>
+        <a
+                href="{% url 'events:events_by_category' 'party' %}"
+                class="list-group-item list-group-item-action">Party</a>
+    </div>
+</div>
