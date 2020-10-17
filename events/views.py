@@ -28,9 +28,13 @@ def new_event(request):
     if request.method == 'POST':
         event_form = EventForm(request.POST)
         if event_form.is_valid():
-            event = Event(title=request.POST['title'], description=request.POST['description'],
-                          appointment_date=request.POST['appointment_date'],
-                          image_url=request.POST['image_url'])
+            event = Event(
+                title=request.POST['title'],
+                description=request.POST['description'],
+                category=request.POST['category'],
+                appointment_date=request.POST['appointment_date'],
+                image_url=request.POST['image_url']
+            )
             event.save()
             messages.success(request, f'{event.title} is created.')
             return redirect('events:feed')
