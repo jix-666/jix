@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.utils.text import slugify
 
 from .forms import EventForm
 from .models import Event
@@ -9,7 +10,7 @@ from .models import Event
 
 
 def events(request):
-    all_events = Event.objects.all()
+    all_events = Event.objects.all().order_by('-created_at')
     return render(request, 'events/all_events.html', {
         'all_events': all_events,
         'all_events_active': True
@@ -17,7 +18,7 @@ def events(request):
 
 
 def events_by_category(request, event_category):
-    events_in_category = Event.objects.filter(category=event_category)
+    events_in_category = Event.objects.filter(category=event_category).order_by('-created_at')
     return render(request, 'events/events_by_category.html', {
         'events_in_category': events_in_category,
         'category': event_category,
@@ -28,9 +29,13 @@ def new_event(request):
     if request.method == 'POST':
         event_form = EventForm(request.POST)
         if event_form.is_valid():
-            event = Event(title=request.POST['title'], description=request.POST['description'],
-                          appointment_date=request.POST['appointment_date'],
-                          image_url=request.POST['image_url'])
+            event = Event(
+                title=request.POST['title'],
+                description=request.POST['description'],
+                category=request.POST['category'],
+                appointment_date=request.POST['appointment_date'],
+                image_url=request.POST['image_url']
+            )
             event.save()
             messages.success(request, f'{event.title} is created.')
             return redirect('events:feed')
@@ -62,6 +67,7 @@ def edit_event(request, event_category, event_slug):
         event.category = request.POST['category']
         event.appointment_date = request.POST['appointment_date']
         event.image_url = request.POST['image_url']
+        event.slug = slugify(request.POST['title'])
         event.save()
         return redirect('events:feed')
     return render(request, 'events/edit_event.html', {
