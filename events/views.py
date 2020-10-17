@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.utils.text import slugify
 
 from .forms import EventForm
 from .models import Event
@@ -66,6 +67,7 @@ def edit_event(request, event_category, event_slug):
         event.category = request.POST['category']
         event.appointment_date = request.POST['appointment_date']
         event.image_url = request.POST['image_url']
+        event.slug = slugify(request.POST['title'])
         event.save()
         return redirect('events:feed')
     return render(request, 'events/edit_event.html', {
