@@ -1,16 +1,20 @@
 {% extends 'events/main.html' %}
 {% block content %}
 
-    <div class="container">
-        <p>
-            <h1> {{ event.title }} </h1>
-            <img src="{{ event.image_url }}" alt="{{ event.title }}" width="700" class="my-5">
-            <p> {{ event.description }} </p>
-            <p >Created at: {{ event.created_at }} </p>
-            <p>Appointment date: {{ event.appointment_date }}</p>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1> {{ event.title }} </h1>
+                <img src="{{ event.image_url }}" alt="{{ event.title }}" style="height: 25vw"
+                     class="img-fluid rounded my-5">
+                <p> {{ event.description }} </p>
+                <p>Created at: {{ event.created_at }} </p>
+                <p>Appointment date: {{ event.appointment_date }}</p>
 
-        <a class="btn btn-success" href="{% url 'events:edit_event' event.category event.slug %}">Edit</a>
-        <a class="btn btn-danger" href="{% url 'events:delete_event' event.category event.slug %}">Delete</a>
+                <a class="btn btn-success" href="{% url 'events:edit_event' event.category event.slug %}">Edit</a>
+                <a class="btn btn-danger" href="{% url 'events:delete_event' event.category event.slug %}">Delete</a>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

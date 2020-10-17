@@ -1,6 +1,6 @@
 <div class="card my-3">
     <a href="{% url 'events:event_detail' event.category event.slug %}" style="text-decoration: none">
-        <img class="card-img-top" src="{{ event.image_url }}" alt="{{ event.title }}">
+        <img class="card-img-top img-fluid" src="{{ event.image_url }}" alt="{{ event.title }}">
         <h5 class="card-title">{{ event.title }}</h5>
         <p class="card-text">{{ event.description }}</p>
         <p class="card-text">
