@@ -69,6 +69,7 @@ def edit_event(request, event_category, event_slug):
         event.image_url = request.POST['image_url']
         event.slug = slugify(request.POST['title'])
         event.save()
+        messages.info(request, f'{event.title} was updated.')
         return redirect('events:feed')
     return render(request, 'events/edit_event.html', {
         'event_form': event_form,
@@ -80,4 +81,5 @@ def edit_event(request, event_category, event_slug):
 def delete_event(request, event_category, event_slug):
     event = Event.objects.get(slug=event_slug, category=event_category)
     event.delete()
+    messages.warning(request, f'{event.title} is deleted.')
     return redirect('events:feed')
