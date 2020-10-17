@@ -10,7 +10,7 @@ from .models import Event
 
 
 def events(request):
-    all_events = Event.objects.all()
+    all_events = Event.objects.all().order_by('-created_at')
     return render(request, 'events/all_events.html', {
         'all_events': all_events,
         'all_events_active': True
@@ -18,7 +18,7 @@ def events(request):
 
 
 def events_by_category(request, event_category):
-    events_in_category = Event.objects.filter(category=event_category)
+    events_in_category = Event.objects.filter(category=event_category).order_by('-created_at')
     return render(request, 'events/events_by_category.html', {
         'events_in_category': events_in_category,
         'category': event_category,
