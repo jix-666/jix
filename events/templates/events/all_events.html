@@ -13,16 +13,16 @@
             {% endfor %}
         {% endif %}
         <div class="row">
-            <div class="col-3">
+            <div class="col-md-3 col-12">
                 {% include 'components/sidenav.html' %}
             </div>
-            <div class="col-9">
+            <div class="col-md-9 col-12">
                 <h1 class="d-inline">All Events</h1>
                 <a class="btn btn-success float-right d-inline" href="{% url 'events:new' %}">+ New Event</a>
                 <div class="row mt-4">
                     {% if all_events %}
                         {% for event in all_events %}
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-6">
                                 {% include 'components/event_card.html' %}
                             </div>
                         {% endfor %}
