@@ -1,7 +1,18 @@
 {% extends 'events/main.html' %}
 {% block content %}
+    {% load static %}
 
-    <h1>This is index page</h1>
-    <a href="{% url 'events:feed' %}">View all events</a>
+    <div class="bg-primary p-5" style="height: 50vh">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <img src="" alt="thumbnail">
+            </div>
+            <div class="col-12 col-md-6">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab blanditiis commodi consequatur cum
+                distinctio dolores earum facere, minima nulla officia quis quo repellendus, repudiandae, sapiente
+                suscipit tempore vero. Officia?
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
