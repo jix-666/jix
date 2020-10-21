@@ -1,10 +1,19 @@
-<div class="card my-3">
-    <a href="{% url 'events:event_detail' event.category event.slug %}" style="text-decoration: none">
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+</style>
+<a href="{% url 'events:event_detail' event.category event.slug %}" style="text-decoration: none">
+    <div class="card my-3" style="height: 50vh">
         <img class="card-img-top img-fluid" src="{{ event.image_url }}" alt="{{ event.title }}">
-        <h5 class="card-title">{{ event.title }}</h5>
-        <p class="card-text">{{ event.description }}</p>
-        <p class="card-text">
-            <small class="text-muted">{{ event.appointment_date }}</small>
-        </p>
-    </a>
-</div>
+        <div class="card-body">
+            <h5 class="card-title">{% if event.title|length <= 36 %} {{ event.title }} {% else %}
+                {{ event.title|slice:":33" }}... {% endif %}</h5>
+            <p class="card-text">{% if event.description|length <= 100 %} {{ event.description }} {% else %}
+                {{ event.description|slice:":96" }}... {% endif %} </p>
+            <small class="card-subtitle text-muted">{{ event.appointment_date }}</small>
+        </div>
+    </div>
+</a>
