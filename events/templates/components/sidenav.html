@@ -1,5 +1,5 @@
 <div class="card p-3">
-    {% if request.get_full_path == "/events/" %}
+    {% if "/events/" in request.get_full_path %}
         <h3 class="mb-3">Category</h3>
         <div class="list-group">
             <a
