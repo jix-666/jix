@@ -13,6 +13,7 @@
 
                 <a class="btn btn-success" href="{% url 'events:edit_event' event.category event.slug %}">Edit</a>
                 <a class="btn btn-danger" href="{% url 'events:delete_event' event.category event.slug %}">Delete</a>
+                <a class="btn btn-warning" href="{% url '' event.category event.slug %}">Report Issue</a>
             </div>
         </div>
     </div>
