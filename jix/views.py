@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 def index(request):
-    return render(request, 'jix/index.html')
+    return render(request, 'jix/index.html', {'is_event_index': True})
