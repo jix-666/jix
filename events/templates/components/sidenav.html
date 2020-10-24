@@ -21,26 +21,30 @@
         <div class="list-group">
             <a
                     href="{% url 'report:feed' %}"
-                    class="list-group-item list-group-item-action {% if all_events_active %}active{% endif %}">All
+                    class="list-group-item list-group-item-action {% if all_reports_active %}active{% endif %}">All
                 reports</a>
             <a
-                    href="{% url 'report:report_by_category' 'non_working' %}"
-                    class="list-group-item list-group-item-action {% if report_type == 'non_working' %}active{% endif %}">Something isn't Working</a>
+                    href="{% url 'report:report_by_category' 'non-working' %}"
+                    class="list-group-item list-group-item-action {% if type == 'non-working' %}active{% endif %}">Something
+                isn't Working</a>
             <a
-                    href="{% url 'report:report_by_category' 'sexual_abusive' %}"
-                    class="list-group-item list-group-item-action {% if report_type == 'sexual_abusive' %}active{% endif %}">Sexually explicit event</a>
+                    href="{% url 'report:report_by_category' 'sexual-abusive' %}"
+                    class="list-group-item list-group-item-action {% if type == 'sexual-abusive' %}active{% endif %}">Sexually
+                explicit event</a>
             <a
                     href="{% url 'report:report_by_category' 'spam' %}"
-                    class="list-group-item list-group-item-action {% if report_type == 'spam' %}active{% endif %}">Spam or scam</a>
+                    class="list-group-item list-group-item-action {% if type == 'spam' %}active{% endif %}">Spam
+                or scam</a>
 
             <a
-                    href="{% url 'report:report_by_category' 'hate_speech' %}"
-                    class="list-group-item list-group-item-action {% if report_type == 'hate_speech' %}active{% endif %}">Hate Speech</a>
+                    href="{% url 'report:report_by_category' 'hate-speech' %}"
+                    class="list-group-item list-group-item-action {% if type == 'hate-speech' %}active{% endif %}">Hate
+                Speech</a>
 
             <a
                     href="{% url 'report:report_by_category' 'violence' %}"
-                    class="list-group-item list-group-item-action {% if report_type == 'violence' %}active{% endif %}">Violence or Harmful event</a>
+                    class="list-group-item list-group-item-action {% if type == 'violence' %}active{% endif %}">Violence
+                or Harmful event</a>
         </div>
-
     {% endif %}
 </div>
