@@ -1,0 +1,14 @@
+<form
+        action="{% url 'report:new' %}"
+        method="post"
+        class="form-group">
+    {% csrf_token %}
+    {{ report_form.as_p }}
+    <button
+            class="btn btn-success d-inline"
+            type="submit">Submit
+    </button>
+    <a
+            class="btn btn-danger float-right d-inline"
+            href="{% url 'report:feed' %}">Back</a>
+</form>
