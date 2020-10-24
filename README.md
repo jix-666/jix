@@ -4,7 +4,9 @@ JiX web application is a web forum for finding friends and people who have mutua
 
 ## Project Documents
 
+- [Project proposal](https://docs.google.com/document/d/1xFfaPgIMUXFGIeDvwk4D-pv7skU7g_7FcfdE7mvHmDA/edit)
 - [Vision Statement](../../wiki/Vision%20Statement)
 - [Requirements](../../wiki/Requirements)
 - [Iteration 1 Plan](../../wiki/Iteration%201%20Plan)
 - [Iteration 2 Plan](../../wiki/Iteration%202%20Plan)
+- [Iteration 3 Plan](../../wiki/Iteration%203%20Plan)
