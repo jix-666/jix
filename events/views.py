@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.utils.text import slugify
 
 from .forms import EventForm
 from .models import Event

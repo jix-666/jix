@@ -1,18 +1,50 @@
 <div class="card p-3">
-    <h3 class="mb-3">Category</h3>
-    <div class="list-group">
-        <a
-                href="{% url 'events:feed' %}"
-                class="list-group-item list-group-item-action {% if all_events_active %}active{% endif %}">All
-            Events</a>
-        <a
-                href="{% url 'events:events_by_category' 'eating' %}"
-                class="list-group-item list-group-item-action {% if category == 'eating' %}active{% endif %}">Eating</a>
-        <a
-                href="{% url 'events:events_by_category' 'sport' %}"
-                class="list-group-item list-group-item-action {% if category == 'sport' %}active{% endif %}">Sport</a>
-        <a
-                href="{% url 'events:events_by_category' 'party' %}"
-                class="list-group-item list-group-item-action {% if category == 'party' %}active{% endif %}">Party</a>
-    </div>
+    {% if "/events/" in request.get_full_path %}
+        <h3 class="mb-3">Category</h3>
+        <div class="list-group">
+            <a
+                    href="{% url 'events:feed' %}"
+                    class="list-group-item list-group-item-action {% if all_events_active %}active{% endif %}">All
+                Events</a>
+            <a
+                    href="{% url 'events:events_by_category' 'eating' %}"
+                    class="list-group-item list-group-item-action {% if category == 'eating' %}active{% endif %}">Eating</a>
+            <a
+                    href="{% url 'events:events_by_category' 'sport' %}"
+                    class="list-group-item list-group-item-action {% if category == 'sport' %}active{% endif %}">Sport</a>
+            <a
+                    href="{% url 'events:events_by_category' 'party' %}"
+                    class="list-group-item list-group-item-action {% if category == 'party' %}active{% endif %}">Party</a>
+        </div>
+    {% else %}
+        <h3 class="mb-3">Type</h3>
+        <div class="list-group">
+            <a
+                    href="{% url 'report:feed' %}"
+                    class="list-group-item list-group-item-action {% if all_reports_active %}active{% endif %}">All
+                reports</a>
+            <a
+                    href="{% url 'report:report_by_category' 'non-working' %}"
+                    class="list-group-item list-group-item-action {% if type == 'non-working' %}active{% endif %}">Something
+                isn't Working</a>
+            <a
+                    href="{% url 'report:report_by_category' 'sexual-abusive' %}"
+                    class="list-group-item list-group-item-action {% if type == 'sexual-abusive' %}active{% endif %}">Sexually
+                explicit event</a>
+            <a
+                    href="{% url 'report:report_by_category' 'spam' %}"
+                    class="list-group-item list-group-item-action {% if type == 'spam' %}active{% endif %}">Spam
+                or scam</a>
+
+            <a
+                    href="{% url 'report:report_by_category' 'hate-speech' %}"
+                    class="list-group-item list-group-item-action {% if type == 'hate-speech' %}active{% endif %}">Hate
+                Speech</a>
+
+            <a
+                    href="{% url 'report:report_by_category' 'violence' %}"
+                    class="list-group-item list-group-item-action {% if type == 'violence' %}active{% endif %}">Violence
+                or Harmful event</a>
+        </div>
+    {% endif %}
 </div>

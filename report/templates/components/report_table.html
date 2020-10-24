@@ -1,0 +1,30 @@
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Reported at</th>
+            <th scope="col">Event</th>
+            <th scope="col">Detail</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for report in reports %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ report.reported_at|date:"D d M Y" }} {{ report.reported_at|time:"H:i" }}</td>
+                <td>
+                    <a href="{% url 'events:event_detail' report.event.category report.event.slug %}">
+                        {{ report.event.title }}
+                    </a>
+                </td>
+                <td>{{ report.detail }}</td>
+                <td class="text-center">
+                    <a href="{% url 'report:delete_report' report.report_type report.id %}">X</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
