@@ -20,12 +20,8 @@
                 <h1 class="d-inline">All Reports</h1>
                 <a class="btn btn-warning float-right d-inline" href="{% url 'report:new' %}">Report an issue</a>
                 <div class="row mt-4">
-                    {% if all_events %}
-                        {% for event in all_events %}
-                            <div class="col-md-4 col-6">
-                                {% include 'components/event_card.html' %}
-                            </div>
-                        {% endfor %}
+                    {% if reports %}
+                        {% include 'components/report_table.html' %}
                     {% else %}
                         <p>No reports.</p>
                     {% endif %}
