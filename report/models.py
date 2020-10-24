@@ -18,6 +18,3 @@ class Report(models.Model):
     report_type = models.CharField(max_length=15, choices=REPORT_TYPE, default='')
     detail = models.TextField(max_length=500)  # detail of the report
     reported_at = models.DateTimeField(default=timezone.now)  # reported date of the event
-    slug = models.SlugField(unique=True)
-
-

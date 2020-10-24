@@ -7,15 +7,11 @@
                 {% include 'components/sidenav.html' %}
             </div>
             <div class="col-md-9 col-12">
-                <h1 class="d-inline">{{ category | capfirst }}</h1>
+                <h1 class="d-inline">{{ type_title | capfirst }}</h1>
                 <a class="btn btn-warning float-right d-inline" href="{% url 'events:new' %}">Report an issue</a>
                 <div class="row mt-4">
-                    {% if events_in_category %}
-                        {% for event in events_in_category %}
-                            <div class="col-md-4 col-6">
-                                {% include 'components/event_card.html' %}
-                            </div>
-                        {% endfor %}
+                    {% if reports %}
+                        {% include 'components/report_table.html' %}
                     {% else %}
                         <p>No reports in this category.</p>
                     {% endif %}
