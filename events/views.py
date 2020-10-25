@@ -83,5 +83,5 @@ def report_event(request, event_category, event_slug):
             messages.success(request, f'Report of {event.title} is created.')
             return redirect('events:feed')
     else:
-        report_form = ReportForm()
+        report_form = ReportForm(initial={'event': event})
     return render(request, 'report/new_report.html', {'report_form': report_form})
