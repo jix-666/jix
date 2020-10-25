@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from report.forms import ReportForm
 from .forms import EventForm
 from .models import Event
+from report.models import Report
 
 
 # Create your views here.
@@ -78,10 +79,10 @@ def report_event(request, event_category, event_slug):
     if request.method == 'POST':
         report_form = ReportForm(request.POST)
         if report_form.is_valid():
-            report_form.event = event
-            report_form.save()
-            messages.success(request, f'Report of {event.title} is created.')
+            report = Report(event=event, report_type=request.POST['report_type'], detail=request.POST['detail'])
+            report.save()
+            messages.warning(request, f'{event.title} is reported.')
             return redirect('events:feed')
     else:
         report_form = ReportForm(initial={'event': event})
-    return render(request, 'report/new_report.html', {'report_form': report_form})
+    return render(request, 'report/new_report.html', {'report_form': report_form, 'event': event})
