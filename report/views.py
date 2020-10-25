@@ -1,8 +1,5 @@
-from django.contrib import messages
 from django.shortcuts import render, redirect
 
-from events.models import Event
-from .forms import ReportForm
 from .models import Report
 
 

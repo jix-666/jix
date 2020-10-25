@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
 
+from . import views
 
 app_name = 'events'
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('<str:event_category>/<slug:event_slug>/', views.event_detail, name='event_detail'),
     path('<str:event_category>/<slug:event_slug>/edit/', views.edit_event, name='edit_event'),
     path('<str:event_category>/<slug:event_slug>/delete/', views.delete_event, name='delete_event'),
+    path('<str:event_category>/<slug:event_slug>/report/', views.report_event, name='report_event'),
 ]
