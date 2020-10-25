@@ -26,6 +26,18 @@ def report_by_category(request, type_of_report):
     })
 
 
+def new_report(request):
+    if request.method == 'POST':
+        report_form = ReportForm(request.POST)
+        if report_form.is_valid():
+            report_form.save()
+            messages.success(request, f'Report of {Event.objects.get(pk=request.POST["event"]).title} is created.')
+            return redirect('report:feed')
+    else:
+        report_form = ReportForm()
+    return render(request, 'report/new_report.html', {'report_form': report_form})
+
+
 def delete_report(request, type_of_report, report_id):
     Report.objects.get(report_type=type_of_report, pk=report_id).delete()
     return redirect('report:feed')
