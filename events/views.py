@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
+from report.forms import ReportForm
 from .forms import EventForm
 from .models import Event
+from report.models import Report
 
 
 # Create your views here.
@@ -70,3 +72,17 @@ def delete_event(request, event_category, event_slug):
     event.delete()
     messages.warning(request, f'{event.title} is deleted.')
     return redirect('events:feed')
+
+
+def report_event(request, event_category, event_slug):
+    event = Event.objects.get(slug=event_slug, category=event_category)
+    if request.method == 'POST':
+        report_form = ReportForm(request.POST)
+        if report_form.is_valid():
+            report = Report(event=event, report_type=request.POST['report_type'], detail=request.POST['detail'])
+            report.save()
+            messages.warning(request, f'{event.title} is reported.')
+            return redirect('events:feed')
+    else:
+        report_form = ReportForm(initial={'event': event})
+    return render(request, 'report/new_report.html', {'report_form': report_form, 'event': event})
