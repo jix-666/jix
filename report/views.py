@@ -1,8 +1,5 @@
-from django.contrib import messages
 from django.shortcuts import render, redirect
 
-from events.models import Event
-from .forms import ReportForm
 from .models import Report
 
 
@@ -24,18 +21,6 @@ def report_by_category(request, type_of_report):
         'type': type_of_report,
         'type_title': type_of_report.replace('-', ' '),
     })
-
-
-def new_report(request):
-    if request.method == 'POST':
-        report_form = ReportForm(request.POST)
-        if report_form.is_valid():
-            report_form.save()
-            messages.success(request, f'Report of {Event.objects.get(pk=request.POST["event"]).title} is created.')
-            return redirect('report:feed')
-    else:
-        report_form = ReportForm()
-    return render(request, 'report/new_report.html', {'report_form': report_form})
 
 
 def delete_report(request, type_of_report, report_id):
