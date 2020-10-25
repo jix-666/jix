@@ -7,7 +7,8 @@
                 {% include 'components/sidenav.html' %}
             </div>
             <div class="col-md-9 col-12">
-                <h1>{{ type_title | capfirst }}</h1>
+                <h1 class="d-inline">{{ type_title | capfirst }}</h1>
+                <a class="btn btn-warning float-right d-inline" href="{% url 'events:new' %}">Report an issue</a>
                 <div class="row mt-4">
                     {% if reports %}
                         {% include 'components/report_table.html' %}

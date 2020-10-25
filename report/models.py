@@ -5,7 +5,7 @@ from django.utils import timezone
 
 REPORT_TYPE = [
     ('', '----------'),
-    ('non-working', "Something isn't Working"),
+    ('nonworking', "Something isn't Working"),
     ('sexual-abusive', 'Sexually explicit event'),
     ('spam', 'Spam or scam'),
     ('hate-speech', 'Hate Speech'),
