@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-9 col-12">
                 <h1 class="d-inline">All Events</h1>
-                <a class="btn btn-success float-right d-inline" href="{% url 'events:new' %}">New Event</a>
+                <a class="btn btn-success float-right d-inline" href="{% url 'events:new' %}">+ New Event</a>
                 <div class="row mt-4">
                     {% if all_events %}
                         {% for event in all_events %}
