@@ -24,4 +24,5 @@ urlpatterns = [
     path('events/', include('events.urls')),
     path('reports/', include('report.urls')),
     url('', include('social_django.urls', namespace='social')),
+    path('accounts/', include('accounts.urls')),
 ]
