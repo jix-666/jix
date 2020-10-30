@@ -8,34 +8,34 @@
                 </div>
                 <div class="d-flex justify-content-center form_container">
 
-                    <form method="POST" action="">
+                    <form class="form-group" method="POST" action="">
                         {% csrf_token %}
                         <div class="input-group mb-3">
-                            <div class="input-group-append">
+                            <div class="input-group-prepend">
                                 <span class="input-group-text">{{ form.username.label }}</span>
                             </div>
                             {{ form.username }}
                         </div>
                         <div class="input-group mb-3">
-                            <div class="input-group-append">
+                            <div class="input-group-prepend">
                                 <span class="input-group-text">{{ form.first_name.label }}</span>
                             </div>
                             {{ form.first_name }}
                         </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
                                 <span class="input-group-text">{{ form.email.label }}</span>
                             </div>
                             {{ form.email }}
                         </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
                                 <span class="input-group-text">{{ form.password1.label }}</span>
                             </div>
                             {{ form.password1 }}
                         </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
                                 <span class="input-group-text">{{ form.password2.label }}</span>
                             </div>
                             {{ form.password2 }}
