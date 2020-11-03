@@ -61,6 +61,8 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.yahoo.YahooOpenId',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -143,3 +145,7 @@ STATIC_URL = '/static/'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '620610258145-fpp1qjceftu6q4424ufi76s3jkv4dom5.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '9AY4vaqn2DXCi_i35F36E918'
+SOCIAL_AUTH_TWITTER_KEY = '1Tdy0033ech2XCaY7Tp0QM1G4'
+SOCIAL_AUTH_TWITTER_SECRET = '49uXKIuCzex3rGMc3GHhuamTKsD1Vq6b4qfd7pxxrC3QmjIMAB'
+SOCIAL_AUTH_FACEBOOK_KEY = '372202590650893'
+SOCIAL_AUTH_FACEBOOK_SECRET = '9b693cb11574e19ca5fbd8f2533ab010'

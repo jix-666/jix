@@ -26,17 +26,59 @@
                         <div class="d-flex justify-content-center mt-3 login_container">
                             <input class="btn login_btn btn-success my-4" type="submit" value="Login">
                         </div>
-
+                        <a href="{% url "social:begin" "google-oauth2" %}">
+                            <div class='text-center'>
+                                <div class=content-wrapper>
+                                    <div class='logo-wrapper'>
+                                        <img src='https://developers.google.com/identity/sign-in/g-normal.png'><span>Login with Google</span>
+                                    </div>
+                                    <span class='text-container'>
+                                </span>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- <a href="{% url "social:begin" "facebook" %}">
+                            <div class='text-center'>
+                                <div class=content-wrapper>
+                                    <div class='logo-wrapper'>
+                                        <img src='https://developers.google.com/identity/sign-in/g-normal.png'><span>Login with Facebook</span>
+                                    </div>
+                                    <span class='text-container'>
+                                </span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="{% url "social:begin" "twitter" %}">
+                            <div class='text-center'>
+                                <div class=content-wrapper>
+                                    <div class='logo-wrapper'>
+                                        <img src='https://developers.google.com/identity/sign-in/g-normal.png'><span>Login with Twitter</span>
+                                    </div>
+                                    <span class='text-container'>
+                                </span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="{% url "social:begin" "instagram" %}">
+                            <div class='text-center'>
+                                <div class=content-wrapper>
+                                    <div class='logo-wrapper'>
+                                        <img src='https://developers.google.com/identity/sign-in/g-normal.png'><span>Login with Instagram</span>
+                                    </div>
+                                    <span class='text-container'>
+                                </span>
+                                </div>
+                            </div>
+                        </a>
                     </form>
                 </div>
-
                 {% for message in messages %}
                     <div class="alert alert-{{ message.tags }} " role="alert">
                         {{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>
+                    </div> -->
                 {% endfor %}
 
                 <div class="mt-4">
