@@ -7,6 +7,8 @@ ignore =
     D100  # Missing docstring in public module
     D104  # Missing docstring in public package
     DJ08  # Model does not define __str__ method
+    D106  # Missing docstring in public nested class
+
 
 
 exclude =
