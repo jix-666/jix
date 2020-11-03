@@ -4,7 +4,10 @@ from django.contrib.auth.models import User
 
 
 class UserForm(UserCreationForm):
+    """A form to register a user."""
+
     def __init__(self, *args, **kwargs):
+        """Initialize a user form."""
         super(UserForm, self).__init__(*args, **kwargs)
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'

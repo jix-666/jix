@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def register_page(request):
+    """Register user account for the site."""
     form = UserForm()
 
     if request.method == "POST":
@@ -22,6 +23,7 @@ def register_page(request):
 
 
 def login_page(request):
+    """Log user into the site."""
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -39,5 +41,6 @@ def login_page(request):
 
 
 def logout_user(request):
+    """Log user out of the site."""
     logout(request)
     return redirect('login')
