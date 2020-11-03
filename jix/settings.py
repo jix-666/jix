@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'events',
     'jix',
     'report',
+    'social_django',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -52,12 +54,29 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.yahoo.YahooOpenId',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+LOGIN_REDIRECT_URL = '/events/'
+LOGOUT_REDIRECT_URL = '/events'
+
 ROOT_URLCONF = 'jix.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [os.path.join(BASE_DIR / 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,6 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -121,3 +142,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '620610258145-fpp1qjceftu6q4424ufi76s3jkv4dom5.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '9AY4vaqn2DXCi_i35F36E918'
+SOCIAL_AUTH_TWITTER_KEY = '1Tdy0033ech2XCaY7Tp0QM1G4'
+SOCIAL_AUTH_TWITTER_SECRET = '49uXKIuCzex3rGMc3GHhuamTKsD1Vq6b4qfd7pxxrC3QmjIMAB'
+SOCIAL_AUTH_FACEBOOK_KEY = '372202590650893'
+SOCIAL_AUTH_FACEBOOK_SECRET = '9b693cb11574e19ca5fbd8f2533ab010'

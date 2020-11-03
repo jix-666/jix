@@ -11,12 +11,22 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link">Sign in</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link">Sign up</a>
-        </li>
-    </ul>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link">Hello, {{ user.first_name | capfirst }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+                </li>
+
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Sign in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"href="{% url 'register' %}">Sign up</a>
+                </li>
+            {% endif %}
+        </ul>
     </div>
 </nav>

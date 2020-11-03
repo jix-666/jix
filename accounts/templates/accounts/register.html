@@ -1,0 +1,68 @@
+{% extends 'events/main.html' %}
+{% block content %}
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+                    <h3 id="form-title" class="my-5">REGISTER ACCOUNT</h3>
+                </div>
+                <div class="d-flex justify-content-center form_container">
+
+                    <form class="form-group" method="POST" action="">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{ form.username.label }}</span>
+                            </div>
+                            {{ form.username }}
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{ form.first_name.label }}</span>
+                            </div>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{ form.email.label }}</span>
+                            </div>
+                            {{ form.email }}
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{ form.password1.label }}</span>
+                            </div>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{ form.password2.label }}</span>
+                            </div>
+                            {{ form.password2 }}
+                        </div>
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <input class="btn login_btn btn-success my-4" type="submit" value="Register Account">
+                        </div>
+                    </form>
+                </div>
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger " role="alert">
+                            {{ error }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div> 
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                <div class="mt-4">
+                    <div class="d-flex justify-content-center links">
+                        Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
