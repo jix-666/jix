@@ -16,8 +16,6 @@ def register_page(request):
             user = form.cleaned_data.get('username')
             messages.success(request, f'Account for {user} was created')
             return redirect('login')
-        else:
-            messages.info(request, 'Username or Password is incorrect.')
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
 
@@ -36,8 +34,7 @@ def login_page(request):
         else:
             messages.warning(request, 'Username or Password is incorrect.')
 
-    context = {}
-    return render(request, 'accounts/login.html', context)
+    return render(request, 'accounts/login.html')
 
 
 def logout_user(request):
