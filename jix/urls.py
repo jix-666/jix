@@ -23,6 +23,6 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('events/', include('events.urls')),
     path('reports/', include('report.urls')),
-    url('', include('social_django.urls', namespace='social')),
+    path('', include('social_django.urls'), name='social'),
     path('accounts/', include('accounts.urls')),
 ]
