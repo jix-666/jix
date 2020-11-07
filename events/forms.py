@@ -5,6 +5,8 @@ from events.models import Event
 
 
 class EventForm(ModelForm):
+    """A form to create an event."""
+
     class Meta:
         model = Event
         fields = ['title', 'description', 'category', 'appointment_date', 'image_url']
