@@ -9,6 +9,7 @@ from django.utils import timezone
 from events.models import Event
 from report.models import Report
 
+
 def create_event(title, description, category):
     """Create an event with the given `title`, `description` and `category`."""
     created_at = timezone.now()
@@ -21,21 +22,26 @@ def create_event(title, description, category):
     event1.save()
     return event1
 
+
 def report_and_create_event(report_type, detail):
-    """Report an event"""
+    """Create and event and report that event."""
     event = create_event("Walking", "Walk in Jungle", "Sport", )
     reported_at = timezone.now()
-    report1 =Report.objects.create(event=event, report_type=report_type, detail=detail, reported_at=reported_at)
+    report1 = Report.objects.create(event=event, report_type=report_type, detail=detail, reported_at=reported_at)
 
     report1.save()
     return report1
+
 
 def report_event(event, report_type, detail):
+    """Report an event."""
     reported_at = timezone.now()
-    report1 =Report.objects.create(event=event, report_type=report_type, detail=detail, reported_at=reported_at)
+    report1 = Report.objects.create(event=event, report_type=report_type, detail=detail, reported_at=reported_at)
 
     report1.save()
     return report1
+
+
 class EventReportsTest(TestCase):
     """Test for Report Views."""
 
@@ -44,9 +50,9 @@ class EventReportsTest(TestCase):
         response = self.client.get(reverse('report:feed'))
         self.assertContains(response, "No reports.")
         self.assertEqual(response.status_code, 200)
-      
+
     def test_new_report(self):
-        """If event is reported, it will be show on the feed"""
+        """If event is reported, it will be show on the feed."""
         report = report_and_create_event("spam", "Hi", )
         response = self.client.get(reverse('report:feed'))
         self.assertEqual(response.status_code, 200)
@@ -60,11 +66,11 @@ class EventReportsTest(TestCase):
         url = reverse('report:report_by_category', args=(report.report_type,))
         response = self.client.get(url)
         self.assertContains(response, report.event)
-        self.assertNotContains(response, report2.event) 
+        self.assertNotContains(response, report2.event)
         self.assertNotContains(response, "No reports in this category.")
-    
+
     def test_delete_report(self):
-        """If report is deleted,it will be not show on the feed"""
+        """If report is deleted,it will be not show on the feed."""
         report = report_and_create_event("hate-speech", "Hi", )
         url = reverse('report:delete_report', args=(report.report_type, report.id))
         response = self.client.get(url)
