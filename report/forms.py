@@ -5,6 +5,8 @@ from .models import Report
 
 
 class ReportForm(ModelForm):
+    """A form to report an event."""
+
     class Meta:
         model = Report
         fields = ['report_type', 'detail']

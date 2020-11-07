@@ -30,9 +30,11 @@ class Event(models.Model):
     #
     # )
 
+    def __str__(self):
+        """Return a  string representation of the Event object."""
+        return self.title
+
     def save(self, *args, **kwargs):
+        """Save the slug of the Event object."""
         self.slug = self.slug or slugify(self.title)
         super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.title

@@ -11,6 +11,12 @@ from .models import Event
 
 
 def events(request):
+    """Display all event in the system according to created date.
+
+    Returns:
+    HttpResponseObject -- all events page
+
+    """
     all_events = Event.objects.all().order_by('-created_at')
     return render(request, 'events/all_events.html', {
         'all_events': all_events,
@@ -19,6 +25,12 @@ def events(request):
 
 
 def events_by_category(request, event_category):
+    """Display all event in the system by category according to created date.
+
+    Returns:
+    HttpResponseObject -- event by category page
+
+    """
     events_in_category = Event.objects.filter(category=event_category).order_by('-created_at')
     return render(request, 'events/events_by_category.html', {
         'events_in_category': events_in_category,
@@ -27,6 +39,12 @@ def events_by_category(request, event_category):
 
 
 def new_event(request):
+    """Create a new event.
+
+    Returns:
+    HttpResponseObject -- new event page
+
+    """
     if request.method == 'POST':
         event_form = EventForm(request.POST)
         if event_form.is_valid():
@@ -40,11 +58,23 @@ def new_event(request):
 
 
 def event_detail(request, event_category, event_slug):
+    """Display all detail of specific events.
+
+    Returns:
+    HttpResponseObject -- event detail page
+
+    """
     event = Event.objects.get(slug=event_slug, category=event_category)
     return render(request, 'events/event_detail.html', {'event': event})
 
 
 def edit_event(request, event_category, event_slug):
+    """Edit specific event.
+
+    Returns:
+    HttpResponseObject -- edit event page
+
+    """
     event = Event.objects.get(slug=event_slug, category=event_category)
     event_form = EventForm(initial={
         'title': event.title,
@@ -68,6 +98,12 @@ def edit_event(request, event_category, event_slug):
 
 
 def delete_event(request, event_category, event_slug):
+    """Delete specific event.
+
+    Redirect:
+    redirect to event feed page
+
+    """
     event = Event.objects.get(slug=event_slug, category=event_category)
     event.delete()
     messages.warning(request, f'{event.title} is deleted.')
@@ -75,6 +111,12 @@ def delete_event(request, event_category, event_slug):
 
 
 def report_event(request, event_category, event_slug):
+    """Report specific event.
+
+    Returns:
+    HttpResponseObject -- report event page
+
+    """
     event = Event.objects.get(slug=event_slug, category=event_category)
     if request.method == 'POST':
         report_form = ReportForm(request.POST)
