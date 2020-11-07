@@ -10,10 +10,11 @@
                 <p> {{ event.description }} </p>
                 <p>Created at: {{ event.created_at }} </p>
                 <p>Appointment date: {{ event.appointment_date }}</p>
-                <a class="btn btn-success" href="{% url 'events:edit_event' event.category event.slug %}">Edit</a>
-                <a class="btn btn-danger" href="{% url 'events:delete_event' event.category event.slug %}">Delete</a>
-                <a class="btn btn-warning" href="{% url 'events:report_event' event.category event.slug %}">Report an
+                <a class="btn btn-success"{% if not user.is_authenticated %} style="display: none" {% endif %} href="{% url 'events:edit_event' event.category event.slug %}">Edit</a>
+                <a class="btn btn-danger"{% if not user.is_authenticated %} style="display: none" {% endif %}  href="{% url 'events:delete_event' event.category event.slug %}">Delete</a>
+                <a class="btn btn-warning"{% if not user.is_authenticated %} style="display: none" {% endif %}  href="{% url 'events:report_event' event.category event.slug %}">Report an
                     issue</a>
+                <a class="btn btn-light"{% if not user.is_authenticated %} style="display: none" {% endif %}  href="{% url 'events:joining_event' event.category event.slug %}">Join</a>
             </div>
         </div>
     </div>

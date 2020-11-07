@@ -1,10 +1,11 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from report.forms import ReportForm
 from report.models import Report
 from .forms import EventForm
-from .models import Event
+from .models import Event, Attendees
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -38,6 +39,7 @@ def events_by_category(request, event_category):
     })
 
 
+@login_required(login_url='/accounts/login')
 def new_event(request):
     """Create a new event.
 
@@ -132,3 +134,25 @@ def report_event(request, event_category, event_slug):
     else:
         report_form = ReportForm()
     return render(request, 'events/report_event.html', {'report_form': report_form, 'event': event})
+
+
+def joining_event(request, event_category, event_slug):
+    """
+
+    Returns:
+    HttpResponseObject -- event detail page that has join
+    """
+    event = get_object_or_404(Event, category=event_category, slug=event_slug)
+    # joined = event.attendees_set.get(pk=request.POST['attendees'])
+    # try:
+    #     joined = event.attendees_set.get(pk=request.POST['attendees'])
+    # except(KeyError, Attendees.DoesNotExist):
+    #     return render(request)
+    # else:
+    if Attendees.objects.filter(event=event, user=request.user).exists():
+        Attendees.objects.update(event=event, user=request.user)
+        messages.warning(request, f'You have join {event.title}.')
+    else:
+        Attendees.objects.create(event=event, user=request.user)
+        messages.warning(request, f'You have join {event.title}.')
+    return redirect('events:feed')

@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
@@ -22,6 +24,10 @@ class Event(models.Model):
     appointment_date = models.DateTimeField()  # appointment date of the event
     image_url = models.CharField(max_length=100)  # image of the event
     slug = models.SlugField(unique=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             null=True,
+                             blank=True,
+                             on_delete=models.CASCADE)
 
     # attendees of the event , we'll be dealing with this later
     # attendees = models.ForeignKey(
@@ -38,3 +44,12 @@ class Event(models.Model):
         """Save the slug of the Event object."""
         self.slug = self.slug or slugify(self.title)
         super().save(*args, **kwargs)
+
+
+class Attendees(models.Model):
+    """Attendees model for join button"""
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             null=True,
+                             blank=True,
+                             on_delete=models.CASCADE)
