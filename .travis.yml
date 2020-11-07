@@ -1,0 +1,16 @@
+language: python
+
+# you can use Python 3.7 instead
+python: "3.8"
+
+# Install any dependencies
+install:
+  - pip install -r requirements.txt
+  - pip install social-auth-app-django
+    
+# script to run tests. Script can have many commands, one per line.
+script: 
+  - coverage run manage.py test
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
