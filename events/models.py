@@ -29,13 +29,6 @@ class Event(models.Model):
                              blank=True,
                              on_delete=models.CASCADE)
 
-    # attendees of the event , we'll be dealing with this later
-    # attendees = models.ForeignKey(
-    #     settings.AUTH_USER_MODEL,
-    #     on_delete=models.CASCADE
-    #
-    # )
-
     def __str__(self):
         """Return a  string representation of the Event object."""
         return self.title
@@ -44,9 +37,6 @@ class Event(models.Model):
         """Save the slug of the Event object."""
         self.slug = self.slug or slugify(self.title)
         super().save(*args, **kwargs)
-
-    def is_joined(self):
-        return self.attendee_set.filter(event=self).exists()
 
 
 class Attendee(models.Model):

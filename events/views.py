@@ -51,7 +51,9 @@ def new_event(request):
         event_form = EventForm(request.POST)
         if event_form.is_valid():
             event_title = event_form.cleaned_data['title']
-            event_form.save()
+            event = event_form.save()
+            event.user = request.user
+            event.save()
             messages.success(request, f'{event_title} is created.')
             return redirect('events:feed')
     else:
@@ -67,9 +69,12 @@ def event_detail(request, event_category, event_slug):
 
     """
     event = Event.objects.get(slug=event_slug, category=event_category)
+    if event.attendee_set.filter(user=request.user):
+        return render(request, 'events/event_detail.html', {'event': event, 'joined': True})
     return render(request, 'events/event_detail.html', {'event': event})
 
 
+@login_required(login_url='/accounts/login')
 def edit_event(request, event_category, event_slug):
     """Edit specific event.
 
@@ -99,6 +104,7 @@ def edit_event(request, event_category, event_slug):
     })
 
 
+@login_required(login_url='/accounts/login')
 def delete_event(request, event_category, event_slug):
     """Delete specific event.
 
@@ -112,6 +118,7 @@ def delete_event(request, event_category, event_slug):
     return redirect('events:feed')
 
 
+@login_required(login_url='/accounts/login')
 def report_event(request, event_category, event_slug):
     """Report specific event.
 
@@ -136,6 +143,7 @@ def report_event(request, event_category, event_slug):
     return render(request, 'events/report_event.html', {'report_form': report_form, 'event': event})
 
 
+@login_required(login_url='/accounts/login')
 def joining_event(request, event_category, event_slug):
     """
 
