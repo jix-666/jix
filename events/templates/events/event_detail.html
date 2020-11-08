@@ -12,15 +12,15 @@
                 <p>Appointment date: {{ event.appointment_date }}</p>
                 {% if user.is_authenticated %}
                     {% if event.user == user %}
-                    <a
-                            class="btn btn-success"
-                            {% if user != event.user %}hidden{% endif %}
-                            href="{% url 'events:edit_event' event.category event.slug %}"
-                    >Edit</a>
-                    <a
-                            class="btn btn-danger"
-                            href="{% url 'events:delete_event' event.category event.slug %}"
-                    >Delete</a>
+                        <a
+                                class="btn btn-success"
+                                {% if user != event.user %}hidden{% endif %}
+                                href="{% url 'events:edit_event' event.category event.slug %}"
+                        >Edit</a>
+                        <a
+                                class="btn btn-danger"
+                                href="{% url 'events:delete_event' event.category event.slug %}"
+                        >Delete</a>
                     {% endif %}
                     <a
                             class="btn btn-warning"
@@ -29,7 +29,7 @@
                     <a
                             class="btn btn-light {% if joined %}disabled{% endif %}"
                             href="{% url 'events:joining_event' event.category event.slug %}"
-                    >Join</a>
+                    >{% if joined %}Joined{% else %}Join{% endif %}</a>
                 {% endif %}
             </div>
         </div>
