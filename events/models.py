@@ -45,8 +45,11 @@ class Event(models.Model):
         self.slug = self.slug or slugify(self.title)
         super().save(*args, **kwargs)
 
+    def is_joined(self):
+        return self.attendee_set.filter(event=self).exists()
 
-class Attendees(models.Model):
+
+class Attendee(models.Model):
     """Attendees model for join button"""
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,

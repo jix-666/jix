@@ -1,11 +1,11 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 from report.forms import ReportForm
 from report.models import Report
 from .forms import EventForm
-from .models import Event, Attendees
-from django.contrib.auth.decorators import login_required
+from .models import Event, Attendee
 
 
 # Create your views here.
@@ -143,16 +143,9 @@ def joining_event(request, event_category, event_slug):
     HttpResponseObject -- event detail page that has join
     """
     event = get_object_or_404(Event, category=event_category, slug=event_slug)
-    # joined = event.attendees_set.get(pk=request.POST['attendees'])
-    # try:
-    #     joined = event.attendees_set.get(pk=request.POST['attendees'])
-    # except(KeyError, Attendees.DoesNotExist):
-    #     return render(request)
-    # else:
-    if Attendees.objects.filter(event=event, user=request.user).exists():
-        Attendees.objects.update(event=event, user=request.user)
-        messages.warning(request, f'You have join {event.title}.')
-    else:
-        Attendees.objects.create(event=event, user=request.user)
-        messages.warning(request, f'You have join {event.title}.')
+    if event.attendee_set.filter(user=request.user).exists():
+        messages.warning(request, f'You have already joined {event.title}.')
+        return redirect('events:feed')
+    event.attendee_set.create(user=request.user)
+    messages.success(request, f'You have join {event.title}.')
     return redirect('events:feed')
