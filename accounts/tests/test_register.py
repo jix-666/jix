@@ -52,7 +52,6 @@ class RegistrationTest(TestCase):
 
     def test_register_with_short_password(self):
         """If the password is shorter than 8 characters, the error message will be shown."""
-        """If the password contains only numeric, the error message will be shown."""
         response = self.client.post(reverse('register'), {
             'username': 'testuser', 'email': 'testuser2@gmail.com', 'first_name': 'Testerman2', 'password1': 'sec456',
             'password2': 'sec456'})
