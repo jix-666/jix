@@ -69,9 +69,14 @@ def event_detail(request, event_category, event_slug):
 
     """
     event = Event.objects.get(slug=event_slug, category=event_category)
-    if event.attendee_set.filter(user=request.user):
-        return render(request, 'events/event_detail.html', {'event': event, 'joined': True})
-    return render(request, 'events/event_detail.html', {'event': event})
+    if request.user.is_authenticated:
+        try:
+            joined = event.attendee_set.get(user=request.user)
+        except (KeyError, Attendee.DoesNotExist):
+            return render(request, 'events/event_detail.html', {'event': event})
+        return render(request, 'events/event_detail.html', {'event': event, 'joined': joined})
+    else:
+        return render(request, 'events/event_detail.html', {'event': event})
 
 
 @login_required(login_url='/accounts/login')
