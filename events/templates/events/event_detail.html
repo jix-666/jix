@@ -4,32 +4,41 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-12 col-md-7">
-                <h1> {{ event.title }} </h1>
+                <h1>{{ event.title }}</h1>
                 <img src="{{ event.image_url }}" alt="{{ event.title }}" style="height: 25vw"
-                     class="img-fluid rounded my-5">
-                <p> {{ event.description }} </p>
-                <p>Created at: {{ event.created_at }} </p>
+                     class="img-fluid rounded my-4">
+                <p>{{ event.description }}</p>
+                <p>Created at: {{ event.created_at }}</p>
                 <p>Appointment date: {{ event.appointment_date }}</p>
                 {% if user.is_authenticated %}
-                    {% if event.user == user %}
-                        <a
-                                class="btn btn-success"
-                                {% if user != event.user %}hidden{% endif %}
-                                href="{% url 'events:edit_event' event.category event.slug %}"
-                        >Edit</a>
-                        <a
-                                class="btn btn-danger"
-                                href="{% url 'events:delete_event' event.category event.slug %}"
-                        >Delete</a>
-                    {% endif %}
                     <a
-                            class="btn btn-warning"
-                            href="{% url 'events:report_event' event.category event.slug %}"
-                    >Report an issue</a>
-                    <a
-                            class="btn btn-light {% if joined %}disabled{% endif %}"
+                            class="btn btn-primary mr {% if joined %}disabled{% endif %}"
                             href="{% url 'events:joining_event' event.category event.slug %}"
                     >{% if joined %}Joined{% else %}Join{% endif %}</a>
+                    <div class="btn-group float-right">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Option
+                        </button>
+                        <div class="dropdown-menu">
+                            {% if event.user == user %}
+                                <a
+                                        class="dropdown-item"
+                                        {% if user != event.user %}hidden{% endif %}
+                                        href="{% url 'events:edit_event' event.category event.slug %}"
+                                >Edit</a>
+                                <a
+                                        class="dropdown-item"
+                                        href="{% url 'events:delete_event' event.category event.slug %}"
+                                >Delete</a>
+                                <div class="dropdown-divider"></div>
+                            {% endif %}
+                            <a
+                                    class="dropdown-item"
+                                    href="{% url 'events:report_event' event.category event.slug %}"
+                            >Report an issue</a>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
             <div class="col-12 col-md-5">
