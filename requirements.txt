@@ -2,3 +2,4 @@
 coverage
 Django~=3.1.1
 social-auth-app-django
+django-environ
