@@ -88,20 +88,27 @@ def edit_event(request, event_category, event_slug):
 
     """
     event = Event.objects.get(slug=event_slug, category=event_category)
-    event_form = EventForm(initial={
-        'title': event.title,
-        'description': event.description,
-        'category': event.category,
-        'appointment_date': event.appointment_date,
-        'image_url': event.image_url
-    })
-    if request.method == 'POST':
-        event_form = EventForm(request.POST, instance=event)
-        if event_form.is_valid():
-            event_title = event_form.cleaned_data['title']
-            event_form.save()
-            messages.info(request, f'{event_title} was updated.')
-            return redirect('events:feed')
+    if event.user == request.user and request.user.is_authenticated:
+        event_form = EventForm(initial={
+            'title': event.title,
+            'description': event.description,
+            'category': event.category,
+            'appointment_date': event.appointment_date,
+            'image_url': event.image_url
+        })
+        if request.method == 'POST':
+            event_form = EventForm(request.POST, instance=event)
+            if event_form.is_valid():
+                if event.user == request.user and request.user.is_authenticated:
+                    event_title = event_form.cleaned_data['title']
+                    event_form.save()
+                    messages.info(request, f'{event_title} was updated.')
+                else:
+                    messages.warning(request, f'You can not edit {event.title}.')
+                return redirect('events:feed')
+    else:
+        messages.warning(request, f'You can not edit {event.title}.')
+        return redirect('events:feed')
     return render(request, 'events/edit_event.html', {
         'event_form': event_form,
         'event': event,
@@ -118,8 +125,11 @@ def delete_event(request, event_category, event_slug):
 
     """
     event = Event.objects.get(slug=event_slug, category=event_category)
-    event.delete()
-    messages.warning(request, f'{event.title} is deleted.')
+    if event.user == request.user and request.user.is_authenticated:
+        event.delete()
+        messages.warning(request, f'{event.title} is deleted.')
+    else:
+        messages.warning(request, f'You can not delete {event.title}.')
     return redirect('events:feed')
 
 
