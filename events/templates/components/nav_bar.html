@@ -9,6 +9,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'events:feed' %}">Events</a>
             </li>
+            {% if user.is_superuser %}
+            <li>
+                <a class="nav-link" href="{% url 'report:feed' %}">Reports</a>
+            </li>
+            {% endif %}
         </ul>
         <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}

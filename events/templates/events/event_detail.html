@@ -42,8 +42,8 @@
                 {% endif %}
             </div>
             <div class="col-12 col-md-5">
-                <div class="card shadow rounded mt-5">
-                    <div class="card-body">
+                <div class="card rounded mt-5">
+                    <div class="card-body overflow-auto" style="height: 50vh">
                         <h3 class="card-title">Attendees</h3>
                         {% if event.attendee_set.all %}
                             <h6 class="card-subtitle mb-3 text-muted">{{ event.attendee_set.count }}
