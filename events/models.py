@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
@@ -40,7 +39,12 @@ class Event(models.Model):
 
 
 class Attendee(models.Model):
-    """Attendees model for join button"""
+    """An Attendee model.
+
+    Each Choice is associated with Event and a User.
+
+    """
+
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              null=True,

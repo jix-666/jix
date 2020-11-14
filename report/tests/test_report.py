@@ -1,31 +1,19 @@
 import unittest
-from datetime import datetime
 
+from django.contrib.auth.models import User
 from django.test import TestCase
 # Create your tests here.
 from django.urls import reverse
 from django.utils import timezone
 
-from events.models import Event
 from report.models import Report
-
-
-def create_event(title, description, category):
-    """Create an event with the given `title`, `description` and `category`."""
-    created_at = timezone.now()
-    image_url = 'https://bit.ly/3jlbxGT'
-    appointment_date = datetime.strptime('2020-10-29', '%Y-%m-%d').date()
-
-    event1 = Event.objects.create(title=title, description=description, category=category, created_at=created_at,
-                                  appointment_date=appointment_date, image_url=image_url)
-
-    event1.save()
-    return event1
+from events.tests.test_event import create_event
 
 
 def report_and_create_event(report_type, detail):
     """Create and event and report that event."""
-    event = create_event("Walking", "Walk in Jungle", "Sport", )
+    user = User.objects.create_user(username='testuser', password='secret123456')
+    event = create_event("Walking", "Walk in Jungle", "Sport", user)
     reported_at = timezone.now()
     report1 = Report.objects.create(event=event, report_type=report_type, detail=detail, reported_at=reported_at)
 
@@ -42,6 +30,7 @@ def report_event(event, report_type, detail):
     return report1
 
 
+@unittest.skip("Unfinished")
 class EventReportsTest(TestCase):
     """Test for Report Views."""
 
