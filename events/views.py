@@ -160,7 +160,7 @@ def report_event(request, event_category, event_slug):
 
 @login_required(login_url='/accounts/login')
 def joining_event(request, event_category, event_slug):
-    """
+    """Join an event.
 
     Returns:
     HttpResponseObject -- event detail page that has join

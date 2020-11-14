@@ -1,26 +1,13 @@
 import unittest
-from datetime import datetime
+
 
 from django.test import TestCase
 # Create your tests here.
 from django.urls import reverse
 from django.utils import timezone
 
-from events.models import Event
 from report.models import Report
-
-
-def create_event(title, description, category):
-    """Create an event with the given `title`, `description` and `category`."""
-    created_at = timezone.now()
-    image_url = 'https://bit.ly/3jlbxGT'
-    appointment_date = datetime.strptime('2020-10-29', '%Y-%m-%d').date()
-
-    event1 = Event.objects.create(title=title, description=description, category=category, created_at=created_at,
-                                  appointment_date=appointment_date, image_url=image_url)
-
-    event1.save()
-    return event1
+from events.tests.test_event import create_event
 
 
 def report_and_create_event(report_type, detail):
