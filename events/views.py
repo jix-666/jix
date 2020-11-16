@@ -48,11 +48,12 @@ def new_event(request):
 
     """
     if request.method == 'POST':
-        event_form = EventForm(request.POST)
+        event_form = EventForm(request.POST, request.FILES)
         if event_form.is_valid():
             event_title = event_form.cleaned_data['title']
             event = event_form.save()
             event.user = request.user
+            event.image_upload = event_form.cleaned_data['image_upload']
             event.save()
             messages.success(request, f'{event_title} is created.')
             return redirect('events:feed')

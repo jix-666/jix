@@ -22,6 +22,7 @@ class Event(models.Model):
     created_at = models.DateTimeField(default=timezone.now)  # created date of the event
     appointment_date = models.DateTimeField()  # appointment date of the event
     image_url = models.CharField(max_length=100)  # image of the event
+    image_upload = models.ImageField(upload_to='images/')
     slug = models.SlugField(unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              null=True,
