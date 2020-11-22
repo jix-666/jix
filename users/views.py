@@ -8,7 +8,11 @@ from .models import UserProfile
 
 def profile_page(request, username):
     """Log user into the site."""
-    user = User.objects.get(username=username)
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        messages.warning(request, 'User not found.')
+        return redirect('events:feed')
     user_profile = UserProfile.objects.get(user=user)
     if user_profile.user == request.user and request.user.is_authenticated:
         profile_form = ProfileForm(initial={
