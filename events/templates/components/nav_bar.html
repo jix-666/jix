@@ -18,7 +18,7 @@
         <ul class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link">Hello, {{ user.first_name | capfirst }}</a>
+                    <a class="nav-link" href="{% url 'users:profile' user.username %}">Hello, {{ user.first_name | capfirst }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Sign out</a>

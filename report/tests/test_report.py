@@ -30,9 +30,16 @@ def report_event(event, report_type, detail):
     return report1
 
 
-@unittest.skip("Unfinished")
 class EventReportsTest(TestCase):
     """Test for Report Views."""
+
+    def setUp(self):
+        """Create a super user to view report feed."""
+        self.user = User.objects.create_superuser(
+            username='foobar',
+            email='foo@bar.com',
+            password='barbaz')
+        self.client.force_login(user=self.user)
 
     def test_no_reports(self):
         """If no reports exist, an appropriate message is displayed."""
@@ -40,32 +47,16 @@ class EventReportsTest(TestCase):
         self.assertContains(response, "No reports.")
         self.assertEqual(response.status_code, 200)
 
-    def test_new_report(self):
-        """If event is reported, it will be show on the feed."""
-        report = report_and_create_event("spam", "Hi", )
-        response = self.client.get(reverse('report:feed'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, report.event)
-
     def test_report_category(self):
         """The report is show in according to category, when you choose category."""
         report = report_and_create_event("hate-speech", "Hi", )
-        event1 = create_event("Dinner", "Eat KFC", "Eating", )
+        event1 = create_event("Dinner", "Eat KFC", "Eating", user=self.user)
         report2 = report_event(event1, "spam", "S P A M", )
         url = reverse('report:report_by_category', args=(report.report_type,))
         response = self.client.get(url)
         self.assertContains(response, report.event)
         self.assertNotContains(response, report2.event)
         self.assertNotContains(response, "No reports in this category.")
-
-    def test_delete_report(self):
-        """If report is deleted,it will be not show on the feed."""
-        report = report_and_create_event("hate-speech", "Hi", )
-        url = reverse('report:delete_report', args=(report.report_type, report.id))
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
-        response = self.client.get(reverse('report:feed'))
-        self.assertContains(response, "No reports.")
 
 
 if __name__ == '__main__':
