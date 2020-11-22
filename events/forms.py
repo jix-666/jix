@@ -9,11 +9,12 @@ class EventForm(ModelForm):
 
     class Meta:
         model = Event
-        fields = ['title', 'description', 'category', 'appointment_date', 'image_url', 'image_upload']
+        fields = ['title', 'description', 'category', 'appointment_date', 'image_upload']
         widgets = {'title': forms.TextInput(attrs={'class': 'form-control'}),
                    'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 8}),
                    'category': forms.Select(attrs={'class': 'form-control'}),
-                   'appointment_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
-                   'image_url': forms.TextInput(attrs={'class': 'form-control'}),
+                   'appointment_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
                    'image_upload': forms.ClearableFileInput(attrs={'class': 'form-control'}),
                    }
+        help_texts = {
+            'appointment_date': 'During Edit mode: If you want to keep the same appointment date please enter again!'}

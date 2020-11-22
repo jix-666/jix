@@ -53,7 +53,6 @@ def new_event(request):
             event_title = event_form.cleaned_data['title']
             event = event_form.save()
             event.user = request.user
-            event.image_upload = event_form.cleaned_data['image_upload']
             event.save()
             messages.success(request, f'{event_title} is created.')
             return redirect('events:feed')
@@ -95,7 +94,7 @@ def edit_event(request, event_category, event_slug):
             'description': event.description,
             'category': event.category,
             'appointment_date': event.appointment_date,
-            'image_url': event.image_url
+            'image_upload': event.image_upload,
         })
         if request.method == 'POST':
             event_form = EventForm(request.POST, instance=event)
