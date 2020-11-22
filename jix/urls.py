@@ -21,10 +21,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index, name="index"),
-    path('events/', include('events.urls')),
-    path('reports/', include('report.urls')),
-    path('', include('social_django.urls'), name='social'),
-    path('accounts/', include('accounts.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('admin/', admin.site.urls),
+                  path('', views.index, name="index"),
+                  path('events/', include('events.urls')),
+                  path('reports/', include('report.urls')),
+                  path('', include('social_django.urls'), name='social'),
+                  path('accounts/', include('accounts.urls')),
+                  path('users/', include('users.urls')),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'report',
     'social_django',
     'accounts',
-    'users',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
