@@ -22,7 +22,7 @@ class Event(models.Model):
     created_at = models.DateTimeField(default=timezone.now)  # created date of the event
     appointment_date = models.DateTimeField()  # appointment date of the event
     image_upload = models.ImageField(upload_to='images/')  # image of the event
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, allow_unicode=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              null=True,
                              blank=True,
@@ -34,7 +34,7 @@ class Event(models.Model):
 
     def save(self, *args, **kwargs):
         """Save the slug of the Event object."""
-        self.slug = self.slug or slugify(self.title)
+        self.slug = self.slug or slugify(self.title, allow_unicode=True)
         super().save(*args, **kwargs)
 
 
