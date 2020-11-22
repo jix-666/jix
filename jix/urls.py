@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
 from . import views
 
 urlpatterns = [
@@ -24,4 +25,5 @@ urlpatterns = [
     path('reports/', include('report.urls')),
     path('', include('social_django.urls'), name='social'),
     path('accounts/', include('accounts.urls')),
+    path('users/', include('users.urls')),
 ]

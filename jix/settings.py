@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'jix',
     'report',
     'social_django',
-    'accounts'
+    'accounts',
+    'users',
 ]
 
 MIDDLEWARE = [
