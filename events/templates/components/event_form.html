@@ -6,7 +6,8 @@
                 {% url 'events:new' %}
             {% endif %}"
         method="post"
-        class="form-group">
+        class="form-group"
+        enctype="multipart/form-data">
     {% csrf_token %}
     {{ event_form.as_p }}
     <button

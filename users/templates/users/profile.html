@@ -1,4 +1,30 @@
-<div class="col-12">
-    <img class="img-fluid rounded" src="{{ user.image_url }}" alt="user image profile">
-    <h1>{{ user.username }}</h1>
-</div>
+{% extends 'events/main.html' %}
+{% block content %}
+    <div class="container mt-5">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} " role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <img class="img-fluid rounded-circle" style="height: 30vh;" src="{{ user_profile.profile_picture.url }}"
+                     alt={{ user_profile.user.username }}>
+            </div>
+            <div class="col-12 col-md-8">
+                <h3>{{ user_profile.user.first_name | capfirst }}</h3>
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ profile_form.as_p }}
+                    <input class="btn btn-success" type="submit" name="Update">
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

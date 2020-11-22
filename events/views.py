@@ -48,7 +48,7 @@ def new_event(request):
 
     """
     if request.method == 'POST':
-        event_form = EventForm(request.POST)
+        event_form = EventForm(request.POST, request.FILES)
         if event_form.is_valid():
             event_title = event_form.cleaned_data['title']
             event = event_form.save()
@@ -94,7 +94,7 @@ def edit_event(request, event_category, event_slug):
             'description': event.description,
             'category': event.category,
             'appointment_date': event.appointment_date,
-            'image_url': event.image_url
+            'image_upload': event.image_upload,
         })
         if request.method == 'POST':
             event_form = EventForm(request.POST, instance=event)
