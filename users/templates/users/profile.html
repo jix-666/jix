@@ -19,9 +19,10 @@
                 <form method="POST" action="" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ profile_form.as_p }}
-                    <input class="btn btn-success" type="submit" name="Update">
+                    {% if user == user_profile.user %}
+                        <input class="btn btn-success" type="submit" name="Update">
+                    {% endif %}
                 </form>
-
             </div>
         </div>
 

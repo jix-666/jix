@@ -17,7 +17,7 @@ class DeleteEventTests(TestCase):
         user = User.objects.create_user(username='testuser', password='secret123456')
         self.client.post(reverse('login'), {'username': 'testuser',
                                             'password': 'secret123456'}, follow=True)
-        event1 = create_event("Walking", "Walk in Jungle", "Sport", user)
+        event1 = create_event("Walking", "Walk in Jungle", "sport", user)
         url = reverse('events:delete_event', args=(event1.category, event1.slug))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
@@ -28,11 +28,11 @@ class DeleteEventTests(TestCase):
     def test_delete_without_login(self):
         """If the user is not authenticated and try to delete event it will redirect to login page."""
         created_at = timezone.now()
-        image_url = 'https://bit.ly/3jlbxGT'
+        image_upload = 'media/images/TAE_0028.jpg'
         appointment_date = datetime.strptime('2020-10-29', '%Y-%m-%d').date()
         event1 = Event.objects.create(title="Walking", description="Walk in Jungle", category="Sport",
                                       created_at=created_at,
-                                      appointment_date=appointment_date, image_url=image_url)
+                                      appointment_date=appointment_date, image_upload=image_upload)
         url = reverse('events:delete_event', args=(event1.category, event1.slug))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
