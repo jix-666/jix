@@ -6,12 +6,14 @@ beautifulsoup4==4.9.1
 certifi==2020.6.20
 cffi==1.14.3
 chardet==3.0.4
+cloudinary==1.23.0
 coverage==5.3
 cryptography==3.2.1
 cycler==0.10.0
 defusedxml==0.7.0rc1
 distlib==0.3.1
 dj-database-url==0.5.0
+dj3-cloudinary-storage==0.0.3
 Django==3.1.2
 django-bootstrap4==2.2.0
 django-crispy-forms==1.9.2
@@ -29,7 +31,6 @@ idna==2.10
 isort==5.5.4
 kiwisolver==1.2.0
 lazy-object-proxy==1.4.3
-matplotlib==3.3.2
 mccabe==0.6.1
 numpy==1.19.2
 oauthlib==3.1.0
