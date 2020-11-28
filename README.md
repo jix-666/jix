@@ -11,11 +11,11 @@ JiX web application is a web forum for finding friends and people who have mutua
 |   Python   |   3.7 or higher     |
 |   Django   |   3.1 or higher     |
 
-1. Clone this repo to your computer.
+1. Clone this repository to your computer.
     ```
     git clone https://github.com/jix-666/jix.git
     ```
-2. Change directory to the repo.
+2. Change directory to the repository.
     ```
     cd jix
     ```
@@ -37,23 +37,19 @@ JiX web application is a web forum for finding friends and people who have mutua
     ```
     jix_env\Scripts\activate
     ```
-6. To make sure the pip is up-to-date, install the lastest version of pip.
-    ```
-    jix_env/bin/python -m pip install --upgrade pip
-    ```
-7. Run this command to install all require packages.
+6. Run this command to install all require packages.
     ``` 
     pip install -r requirements.txt
     ```
-8. Create .env file inside jix (same level as settings.py) and added:
+7. Create .env file inside jix (same level as settings.py) and added:
     ```
     DEBUG=True
     ```
-9. Run this command to migrate the database.
+8. Run this command to migrate the database.
     ```
     python manage.py migrate
     ```
-10. Start running the server by this command.
+9. Start running the server by this command.
     ```
     python manage.py runserver
     ```
