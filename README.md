@@ -11,22 +11,46 @@ JiX web application is a web forum for finding friends and people who have mutua
 |   Python   |   3.7 or higher     |
 |   Django   |   3.1 or higher     |
 
-1. clone this repo to your computer.
+1. Clone this repo to your computer.
     ```
     git clone https://github.com/jix-666/jix.git
     ```
-2. run this command to install all require packages.
+2. Change directory to the repo.
+    ```
+    cd jix
+    ```
+3. Install virtualenv to your computer.
+    ```
+    pip install virtualenv
+    ```
+4. Create virtual environment.
+    ```
+    virtualenv jix_env
+    ```
+5. Activate virtualenv by using this command.
+    ```
+    source jix_env/bin/activate
+    ```
+6. To make sure the pip is up-to-date, install the lastest version of pip.
+    ```
+    jix_env/bin/python -m pip install --upgrade pip
+    ```
+7. Run this command to install all require packages.
     ``` 
     pip install -r requirements.txt
     ```
-3. run this command to migrate the database.
+8. Create .env file inside jix (same level as settings.py) and added:
+    ```
+    DEBUG=True
+    ```
+9. Run this command to migrate the database.
     ```
     python manage.py migrate
     ```
-4. start running the server by this command.
+10. Start running the server by this command.
     ```
     python manage.py runserver
-     ```
+    ```
 
 ## Project Documents
 
