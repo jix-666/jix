@@ -28,8 +28,14 @@ JiX web application is a web forum for finding friends and people who have mutua
     virtualenv jix_env
     ```
 5. Activate virtualenv by using this command.
+
+    for Mac OS / Linux
     ```
     source jix_env/bin/activate
+    ```
+    for Windows
+    ```
+    jix_env\Scripts\activate
     ```
 6. To make sure the pip is up-to-date, install the lastest version of pip.
     ```
