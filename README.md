@@ -68,3 +68,4 @@ JiX web application is a web forum for finding friends and people who have mutua
 - [Iteration 4 Plan](../../wiki/Iteration%204%20Plan)
 - [Iteration 5 Plan](../../wiki/Iteration%205%20Plan)
 - [Iteration 6 Plan](../../wiki/Iteration%206%20Plan)
+- [Iteration 7 Plan](../../wiki/Iteration%207%20Plan)
