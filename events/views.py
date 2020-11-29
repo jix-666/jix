@@ -133,7 +133,7 @@ def edit_event(request, event_category, event_slug):
                     if event.user == request.user and request.user.is_authenticated:
                         event_title = event_form.cleaned_data['title']
                         event_slug = slugify(event_title, allow_unicode=True)
-                        if Event.objects.filter(slug=event_slug).exists():
+                        if Event.objects.filter(slug=event_slug).exists() and event_slug != event.slug:
                             messages.warning(request, f'Edition failed, {event_title} is already exists.')
                             return redirect('events:feed')
                         event = event_form.save()
