@@ -128,7 +128,7 @@ def edit_event(request, event_category, event_slug):
                 'image_upload': event.image_upload,
             })
             if request.method == 'POST':
-                event_form = EventForm(request.POST, instance=event)
+                event_form = EventForm(request.POST, request.FILES, instance=event)
                 if event_form.is_valid():
                     if event.user == request.user and request.user.is_authenticated or request.user.is_superuser:
                         event_title = event_form.cleaned_data['title']
