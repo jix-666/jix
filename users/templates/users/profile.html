@@ -1,5 +1,6 @@
 {% extends 'events/main.html' %}
 {% block content %}
+    {% load static %}
 
     <div class="container mt-5">
         {% for message in messages %}
@@ -12,12 +13,20 @@
         {% endfor %}
         <div class="row">
             <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
-                <img class="img-fluid rounded-circle" style="height: 30vh;" src="{{ user_profile.profile_picture.url }}"
-                     alt={{ user_profile.user.username }}>
+                {% if user_profile.profile_picture %}
+                    <img class="img-fluid rounded-circle" style="height: 30vh;"
+                         src="{{ user_profile.profile_picture.url }}"
+                         alt={{ user_profile.user.username }}>
+                {% else %}
+                    <img class="img-fluid rounded-circle" style="height: 30vh;"
+                         src="{% static 'user-icon.png' %}"
+                         alt="default image for user">
+                {% endif %}
             </div>
             <div class="col-12 col-md-8">
                 <h3>{{ user_profile.user.first_name | capfirst }}</h3>
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="POST" action="{% url 'users:profile' user_profile.user.username %}"
+                      enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ profile_form.as_p }}
                     {% if user == user_profile.user %}

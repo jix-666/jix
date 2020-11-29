@@ -215,6 +215,9 @@ def joining_event(request, event_category, event_slug):
         if event.attendee_set.filter(user=request.user).exists():
             messages.warning(request, f'You have already joined {event.title}.')
             return redirect('events:feed')
+        if request.user == event.user:
+            messages.warning(request, f'You cannot join your own event.')
+            return redirect('events:feed')
         event.attendee_set.create(user=request.user)
         messages.success(request, f'You have join {event.title}.')
         return redirect('events:feed')
