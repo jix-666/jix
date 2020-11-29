@@ -53,6 +53,34 @@ JiX web application is a web forum for finding friends and people who have mutua
     ```
     python manage.py runserver
     ```
+For MAC and OSX users may not be able to install psycopg2    
+Follow these steps
+
+1. Install brew by typing this on terminal
+    ```
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)
+    ```
+2. Install postgreSQL and openssl using homebrew
+    ```
+    brew install postgresql
+    brew install openssl
+    ```
+3. export these variable in terminal
+    ```
+    export LDFLAGS="-L/usr/local/opt/openssl/lib"
+    export CPPFLAGS="-I/usr/local/opt/openssl/include"
+    ```
+4. install psycopg2 
+    ```
+    pip3 install psycopg2 
+    ```
+    or 
+    ```
+    sudo pip3 install psycopg2
+    ```
+  
+
+ 
 
 ## Project Documents
 
