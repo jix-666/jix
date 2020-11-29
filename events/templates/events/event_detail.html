@@ -21,10 +21,9 @@
                             Option
                         </button>
                         <div class="dropdown-menu">
-                            {% if event.user == user %}
+                            {% if event.user == user or user.is_superuser %}
                                 <a
                                         class="dropdown-item"
-                                        {% if user != event.user %}hidden{% endif %}
                                         href="{% url 'events:edit_event' event.category event.slug %}"
                                 >Edit</a>
                                 <a

@@ -119,7 +119,7 @@ def edit_event(request, event_category, event_slug):
     """
     event = check_event(request, event_category=event_category, event_slug=event_slug)
     if event:
-        if event.user == request.user and request.user.is_authenticated:
+        if event.user == request.user and request.user.is_authenticated or request.user.is_superuser:
             event_form = EventForm(initial={
                 'title': event.title,
                 'description': event.description,
@@ -130,7 +130,7 @@ def edit_event(request, event_category, event_slug):
             if request.method == 'POST':
                 event_form = EventForm(request.POST, instance=event)
                 if event_form.is_valid():
-                    if event.user == request.user and request.user.is_authenticated:
+                    if event.user == request.user and request.user.is_authenticated or request.user.is_superuser:
                         event_title = event_form.cleaned_data['title']
                         event_slug = slugify(event_title, allow_unicode=True)
                         if Event.objects.filter(slug=event_slug).exists() and event_slug != event.slug:
@@ -165,7 +165,7 @@ def delete_event(request, event_category, event_slug):
     """
     event = check_event(request, event_category=event_category, event_slug=event_slug)
     if event:
-        if event.user == request.user and request.user.is_authenticated:
+        if event.user == request.user and request.user.is_authenticated or request.user.is_superuser:
             event.delete()
             messages.warning(request, f'{event.title} is deleted.')
         else:
