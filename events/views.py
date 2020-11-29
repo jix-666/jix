@@ -11,7 +11,7 @@ from .models import Event, Attendee
 
 # Create your views here.
 
-CATEGORIES = ['eating', 'sport', 'party']
+CATEGORIES = ['eating', 'sport', 'party', 'technology', 'movies', 'crafts', 'business', 'movements', 'education']
 
 
 def check_event(request, event_category, event_slug):
