@@ -1,5 +1,7 @@
 {% extends 'events/main.html' %}
 {% block content %}
+    {% load static %}
+
     <div class="container mt-5">
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }} " role="alert">
@@ -10,13 +12,21 @@
             </div>
         {% endfor %}
         <div class="row">
-            <div class="col-12 col-md-4">
-                <img class="img-fluid rounded-circle" style="height: 30vh;" src="{{ user_profile.profile_picture.url }}"
-                     alt={{ user_profile.user.username }}>
+            <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
+                {% if user_profile.profile_picture %}
+                    <img class="img-fluid rounded-circle" style="height: 30vh;"
+                         src="{{ user_profile.profile_picture.url }}"
+                         alt={{ user_profile.user.username }}>
+                {% else %}
+                    <img class="img-fluid rounded-circle" style="height: 30vh;"
+                         src="{% static 'user-icon.png' %}"
+                         alt="default image for user">
+                {% endif %}
             </div>
             <div class="col-12 col-md-8">
                 <h3>{{ user_profile.user.first_name | capfirst }}</h3>
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="POST" action="{% url 'users:profile' user_profile.user.username %}"
+                      enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ profile_form.as_p }}
                     {% if user == user_profile.user %}
@@ -25,7 +35,37 @@
                 </form>
             </div>
         </div>
-
+        <hr>
+        <div class="row mt-3">
+            <div class="col-12 col-md-6">
+                <h3>{{ user_profile.user.username }}'s event.</h3>
+                <div class="row mt-4">
+                    {% if user_profile.user.event_set.all %}
+                        {% for event in user_profile.user.event_set.all %}
+                            <div class="col-md-6 col-12">
+                                {% include 'components/event_card.html' %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>{{ user_profile.user.username }} haven't create any event yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3>Joined event</h3>
+                <div class="row mt-4">
+                    {% if joined_event %}
+                        {% for event in joined_event %}
+                            <div class="col-md-6 col-12">
+                                {% include 'components/event_card.html' %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>{{ user_profile.user.username }} haven't joined any event yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

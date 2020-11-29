@@ -13,7 +13,7 @@ from events.tests.test_event import create_event
 def report_and_create_event(report_type, detail):
     """Create and event and report that event."""
     user = User.objects.create_user(username='testuser', password='secret123456')
-    event = create_event("Walking", "Walk in Jungle", "Sport", user)
+    event = create_event("Walking", "Walk in Jungle", "sport", user)
     reported_at = timezone.now()
     report1 = Report.objects.create(event=event, report_type=report_type, detail=detail, reported_at=reported_at)
 
@@ -50,7 +50,7 @@ class EventReportsTest(TestCase):
     def test_report_category(self):
         """The report is show in according to category, when you choose category."""
         report = report_and_create_event("hate-speech", "Hi", )
-        event1 = create_event("Dinner", "Eat KFC", "Eating", user=self.user)
+        event1 = create_event("Dinner", "Eat KFC", "eating", user=self.user)
         report2 = report_event(event1, "spam", "S P A M", )
         url = reverse('report:report_by_category', args=(report.report_type,))
         response = self.client.get(url)

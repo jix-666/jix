@@ -11,20 +11,21 @@
                 <p>Created at: {{ event.created_at }}</p>
                 <p>Appointment date: {{ event.appointment_date }}</p>
                 {% if user.is_authenticated %}
-                    <a
-                            class="btn btn-primary mr {% if joined %}disabled{% endif %}"
-                            href="{% url 'events:joining_event' event.category event.slug %}"
-                    >{% if joined %}Joined{% else %}Join{% endif %}</a>
+                    {% if not event.user == user %}
+                        <a
+                                class="btn btn-primary mr {% if joined %}disabled{% endif %}"
+                                href="{% url 'events:joining_event' event.category event.slug %}"
+                        >{% if joined %}Joined{% else %}Join{% endif %}</a>
+                    {% endif %}
                     <div class="btn-group float-right">
                         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             Option
                         </button>
                         <div class="dropdown-menu">
-                            {% if event.user == user %}
+                            {% if event.user == user or user.is_superuser %}
                                 <a
                                         class="dropdown-item"
-                                        {% if user != event.user %}hidden{% endif %}
                                         href="{% url 'events:edit_event' event.category event.slug %}"
                                 >Edit</a>
                                 <a
@@ -50,14 +51,17 @@
                                 attendee{{ event.attendee_set.count|pluralize }}</h6>
                             {% for attendee in event.attendee_set.all %}
                                 <div class="user m-3">
-                                    {% if attendee.user == user %}
-                                        <img src="{{ user.userprofile.profile_picture.url }}" alt="{{ user.username }} image" style="height: 50px;" class="mr-2">
-                                        <a class="card-text" href="{% url 'users:profile' user.username %}">You</a>
+                                    {% if attendee.user.userprofile.profile_picture %}
+                                        <img src="{{ attendee.user.userprofile.profile_picture.url }}"
+                                             alt="{{ attendee.user.username }} image" style="height: 50px;"
+                                             class="mr-2">
                                     {% else %}
-                                        <img src="{{ attendee.user.userprofile.profile_picture.url }}" alt="{{ attendee.user.username }} image" style="height: 50px;" class="mr-2">
-                                        <a class="card-text"
-                                           href="{% url 'users:profile' attendee.user.userprofile.user.username %}">{{ attendee.user }}</a>
+                                        <img src="{% static 'user-icon.png' %}"
+                                             alt="{{ attendee.user.username }} default image" style="height: 50px;"
+                                             class="mr-2">
                                     {% endif %}
+                                    <a class="card-text"
+                                       href="{% url 'users:profile' attendee.user.userprofile.user.username %}">{{ attendee.user }}</a>
                                 </div>
                             {% endfor %}
                         {% else %}

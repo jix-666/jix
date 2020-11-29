@@ -11,10 +11,17 @@ from .models import Event, Attendee
 
 # Create your views here.
 
-CATEGORIES = ['eating', 'sport', 'party']
+CATEGORIES = ['eating', 'sport', 'party', 'technology', 'movies', 'crafts', 'business', 'movements', 'education']
 
 
 def check_event(request, event_category, event_slug):
+    """Check if the event is existed.
+
+    Returns:
+    None - if not exists
+    event - if exists
+
+    """
     try:
         event = Event.objects.get(category=event_category, slug=event_slug)
     except Event.DoesNotExist:
@@ -112,7 +119,7 @@ def edit_event(request, event_category, event_slug):
     """
     event = check_event(request, event_category=event_category, event_slug=event_slug)
     if event:
-        if event.user == request.user and request.user.is_authenticated:
+        if event.user == request.user and request.user.is_authenticated or request.user.is_superuser:
             event_form = EventForm(initial={
                 'title': event.title,
                 'description': event.description,
@@ -123,10 +130,10 @@ def edit_event(request, event_category, event_slug):
             if request.method == 'POST':
                 event_form = EventForm(request.POST, instance=event)
                 if event_form.is_valid():
-                    if event.user == request.user and request.user.is_authenticated:
+                    if event.user == request.user and request.user.is_authenticated or request.user.is_superuser:
                         event_title = event_form.cleaned_data['title']
                         event_slug = slugify(event_title, allow_unicode=True)
-                        if Event.objects.filter(slug=event_slug).exists():
+                        if Event.objects.filter(slug=event_slug).exists() and event_slug != event.slug:
                             messages.warning(request, f'Edition failed, {event_title} is already exists.')
                             return redirect('events:feed')
                         event = event_form.save()
@@ -158,7 +165,7 @@ def delete_event(request, event_category, event_slug):
     """
     event = check_event(request, event_category=event_category, event_slug=event_slug)
     if event:
-        if event.user == request.user and request.user.is_authenticated:
+        if event.user == request.user and request.user.is_authenticated or request.user.is_superuser:
             event.delete()
             messages.warning(request, f'{event.title} is deleted.')
         else:
@@ -207,6 +214,9 @@ def joining_event(request, event_category, event_slug):
     if event:
         if event.attendee_set.filter(user=request.user).exists():
             messages.warning(request, f'You have already joined {event.title}.')
+            return redirect('events:feed')
+        if request.user == event.user:
+            messages.warning(request, f'You cannot join your own event.')
             return redirect('events:feed')
         event.attendee_set.create(user=request.user)
         messages.success(request, f'You have join {event.title}.')
