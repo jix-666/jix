@@ -1,3 +1,6 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
 <form
         action="
             {% if is_edit_mode %}
@@ -9,6 +12,7 @@
         class="form-group"
         enctype="multipart/form-data">
     {% csrf_token %}
+    {{ event_form.media }}
     {{ event_form.as_p }}
     <button
             class="btn btn-success d-inline"

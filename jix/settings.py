@@ -47,7 +47,13 @@ INSTALLED_APPS = [
     'social_django',
     'accounts',
     'users.apps.UsersConfig',
+    'bootstrap4',
+    'bootstrap_datepicker_plus'
 ]
+
+BOOSTRAP4 = {
+    'include_jquery': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
