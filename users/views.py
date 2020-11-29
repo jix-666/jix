@@ -4,16 +4,21 @@ from django.shortcuts import render, redirect
 
 from .forms import ProfileForm
 from .models import UserProfile
+from events.models import Event, Attendee
 
 
 def profile_page(request, username):
     """Log user into the site."""
+    joined_event = []
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
         messages.warning(request, 'User not found.')
         return redirect('events:feed')
     user_profile = UserProfile.objects.get(user=user)
+    user_attendee = Attendee.objects.filter(user=user).all()
+    for user in user_attendee:
+        joined_event.append(user.event)
     profile_form = ProfileForm(initial={
         'user_name': user_profile.user.username,
         'first_name': user_profile.user.first_name,
@@ -35,4 +40,4 @@ def profile_page(request, username):
             else:
                 messages.warning(request, f'You can not edit {username} profile.')
     return render(request, 'users/profile.html',
-                  {'user_profile': user_profile, 'profile_form': profile_form})
+                  {'user_profile': user_profile, 'profile_form': profile_form, 'joined_event': joined_event})
