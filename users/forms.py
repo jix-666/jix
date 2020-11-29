@@ -1,7 +1,5 @@
 from django import forms
 
-from django.contrib.auth.models import User
-
 
 class ProfileForm(forms.Form):
     """A form to check profile."""

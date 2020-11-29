@@ -15,6 +15,13 @@ CATEGORIES = ['eating', 'sport', 'party']
 
 
 def check_event(request, event_category, event_slug):
+    """Check if the event is existed.
+
+    Returns:
+    None - if not exists
+    event - if exists
+
+    """
     try:
         event = Event.objects.get(category=event_category, slug=event_slug)
     except Event.DoesNotExist:
