@@ -34,7 +34,6 @@ def profile_page(request, username):
                 user_username = profile_form.cleaned_data['user_name']
                 user_profile.user.username = user_username
                 user_profile.user.email = profile_form.cleaned_data['email']
-                user_profile.user.first_name = profile_form.cleaned_data['first_name']
                 user_profile.user.save()
                 user_profile.save()
                 messages.info(request, f'{user_username} profile was updated.')
