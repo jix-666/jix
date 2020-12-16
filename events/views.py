@@ -212,7 +212,7 @@ def joining_event(request, event_category, event_slug):
     """
     event = check_event(request, event_category=event_category, event_slug=event_slug)
     if event:
-        if event.is_outdated:
+        if event.is_outdated and request.user != event.user:
             messages.warning(request, f"This event is expired.")
             return redirect('events:feed')
         if event.attendee_set.filter(user=request.user).exists():
