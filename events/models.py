@@ -45,9 +45,11 @@ class Event(models.Model):
         super().save(*args, **kwargs)
 
     def is_outdated(self):
+        """Return a boolean representation of outdated Event object. """
         return self.appointment_date < timezone.now()
 
     def is_hot(self):
+        """Return a boolean representation of popular Event object"""
         return self.attendee_set.count() >= 20
 
 
