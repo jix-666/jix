@@ -7,7 +7,7 @@
     }
 </style>
 <a href="{% url 'events:event_detail' event.category event.slug %}" style="text-decoration: none">
-    <div class="card my-3 shadow">
+    <div class="card my-3 shadow" {% if event.is_hot %}style="background-color: lightblue;"{% endif %}>
         <img class="card-img-top img-fluid" src={{ event.image_upload.url }} alt="{{ event.title }}">
         <div class="card-body">
             <h5 class="card-title">

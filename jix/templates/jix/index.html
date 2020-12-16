@@ -16,8 +16,86 @@
 {% extends 'events/main.html' %}
 {% block content %}
     {% load static %}
+    <link rel="stylesheet" href="{% static 'jix/css/style.css' %}">
 
-    <div class="index-header"style="background-color: lightskyblue">
+    <div class="hero">
+        <div class="wrapper">
+            <div class="hero-text">
+                <h1>Meet new friends <br> who love the same things</h1>
+                <a class="btn" href="{% url 'register' %}">Join JiX</a>
+            </div>
+            <div class="hero-images">
+                <img src="{% static 'jix/people.png' %}" alt="hero image">
+            </div>
+        </div>
+    </div>
+    <div class="intro">
+        <div class="wrapper">
+            <div class="intro-images">
+                <img src="{% static 'jix/concert.jpg' %}" alt="intro image">
+            </div>
+            <div class="intro-text">
+                <h3>JiX is a web forum for finding friends and people who have mutually-interested events. Including Hangout, Meeting, Study, Entertainment, Travel, Technology, Movies etc. <br> Let's go meet some friend!</h3>
+                <a class="btn" href="{% url 'events:feed' %}">Go to feed</a>
+            </div>
+        </div>
+    </div>
+    <div class="benefits">
+        <div class="wrapper">
+            <div class="cards">
+                <div class="benefits-card">
+                    <div class="card-image">
+                        <i class="far fa-calendar-plus fa-3x"></i>
+                    </div>
+                    <h5>Create Event</h5>
+                    <p>Let's start your own event to find new friends.</p>
+                </div>
+                <div class="benefits-card">
+                    <div class="card-image">
+                        <i class="fas fa-sign-in-alt fa-3x"></i>
+                    </div>
+                    <h5>Join Event</h5>
+                    <p>Let's find friends by joining the activity.</p>
+                </div>
+                <div class="benefits-card">
+                    <div class="card-image">
+                        <i class="far fa-address-card fa-3x"></i>
+                    </div>
+                    <h5>Personal Profile</h5>
+                    <p>Tell others about you! and find out about the others.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contact">
+        <div class="wrapper">
+            <h1>Contact us</h1>
+            <div class="peoples">
+                <div class="people">
+                    <img src="{% static 'jix/kuea.jpg' %}" alt="kuea">
+                    <a href="https://github.com/Kuea666">Siravit Ruethaiwat</a>
+                </div>
+                <div class="people">
+                    <img src="{% static 'jix/nice.jpg' %}" alt="nice">
+                    <a href="https://github.com/nicenicegame">Tatpol Samakpong</a>
+                </div>
+                <div class="people">
+                    <img src="{% static 'jix/pooh.jpg' %}" alt="pooh">
+                    <a href="https://github.com/SIrapopKunjiak">Sirapop Kunjiak</a>
+                </div>
+                <div class="people">
+                    <img src="{% static 'jix/tae.jpg' %}" alt="tae">
+                    <a href="https://github.com/ttxking">Anusid Wachiracharoenwong</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="wrapper">
+            <p>JiX &copy; 2020</p>
+        </div>
+    </footer>
+    <!-- <div class="index-header"style="background-color: lightskyblue">
         <div class="row">
             <div class="col-12 col-md-6">
                 <h1 class="text-left" style="font-size: 3em">Meet new friends who love the same things</h1>
@@ -39,7 +117,7 @@
             <a class="btn btn-success mt-3 align-self-center" href="{% url 'events:feed' %}" style="font-size: 1.5em; width: 11em; height: 3em; padding-top: 0.7em">Go to feed</a>
         </div>
      </div>
-     </div>
+     </div> -->
 
 
 {% endblock %}

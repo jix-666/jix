@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+h3, h5 {
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.hero {
+    background: lightskyblue;
+    width: 100%;
+}
+
+.wrapper {
+    width: 80%;
+    min-height: 50vh;
+    margin: 0 auto;
+    display: flex;
+}
+
+.hero-images {
+    flex: 1 1 25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-images img {
+    width: 100%;
+}
+
+.hero-text {
+    flex: 1 1 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.btn {
+    margin-top: 2rem;
+    padding: 1rem 4rem;
+    background: rgb(1, 161, 1);
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.btn:hover {
+    background: green;
+    color: white;
+}
+
+.intro {
+    margin-top: 5rem;
+}
+
+.intro-images {
+    flex: 1 1 25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro-images img {
+    width: 100%;
+}
+
+.intro-text {
+    flex: 1 1 25rem;
+    display: flex;
+    padding-left: 4rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.intro-text a {
+    align-items: center;
+}
+
+.benefits {
+    margin-top: 5rem;
+}
+
+.cards {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.benefits-card {
+    position: relative;
+    width: 31%;
+    background: lightskyblue;
+    border-radius: 10px;
+    padding: 5rem 3rem 3rem;
+    box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1);
+}
+
+.benefits-card h5 {
+    text-align: center;
+}
+
+.benefits-card p {
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.card-image {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    background: rgb(71, 178, 245);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact {
+    margin-bottom: 5rem;
+}
+
+.contact .wrapper {
+    display: block;
+}
+
+.contact .wrapper h1 {
+    margin: 3rem 0;
+}
+
+.contact .peoples {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6rem;
+}
+
+.people img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.people a {
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 2rem;
+    display: block;
+    text-align: center;
+    color: black;
+}
+
+footer {
+    background: lightskyblue;
+}
+
+footer .wrapper {
+    min-height: 10vh;
+    align-items: center;
+    justify-content: flex-end;
+}

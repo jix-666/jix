@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from datetime import datetime
 
 # Create your models here.
 
@@ -45,6 +46,9 @@ class Event(models.Model):
 
     def is_outdated(self):
         return self.appointment_date < timezone.now()
+
+    def is_hot(self):
+        return self.attendee_set.count() >= 20
 
 
 class Attendee(models.Model):

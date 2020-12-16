@@ -212,7 +212,7 @@ def joining_event(request, event_category, event_slug):
     """
     event = check_event(request, event_category=event_category, event_slug=event_slug)
     if event:
-        if event.is_outdated and request.user != event.user:
+        if event.is_outdated() and request.user != event.user:
             messages.warning(request, f"This event is expired.")
             return redirect('events:feed')
         if event.attendee_set.filter(user=request.user).exists():
@@ -234,8 +234,7 @@ def leave_event(request, event_category, event_slug):
     if event:
         if event.attendee_set.filter(user=request.user).exists():
             attendee = event.attendee_set.get(user=request.user)
-            attendee.event = None
-            attendee.save()
+            attendee.delete()
         else:
             messages.warning(request, f"You haven't joined {event.title} yet.")
             return redirect('events:feed')
