@@ -5,6 +5,7 @@
         <div class="row">
             <div class="col-12 col-md-7">
                 <h1>{{ event.title }}</h1>
+                <h6>Created by <a href="{% url "users:profile" event.user.username %}">{{ event.user.username }}</a></h6>
                 <img src="{{ event.image_upload.url }}" alt="{{ event.title }}" style="height: 25vw"
                      class="img-fluid rounded my-4">
                 <p>{{ event.description }}</p>
