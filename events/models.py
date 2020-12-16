@@ -51,7 +51,7 @@ class Attendee(models.Model):
 
     """
 
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              null=True,
                              blank=True,

@@ -223,3 +223,20 @@ def joining_event(request, event_category, event_slug):
         return redirect('events:feed')
     else:
         return redirect('events:feed')
+
+
+@login_required(login_url='/accounts/login')
+def leave_event(request, event_category, event_slug):
+    event = check_event(request, event_category=event_category, event_slug=event_slug)
+    if event:
+        if event.attendee_set.filter(user=request.user).exists():
+            attendee = event.attendee_set.get(user=request.user)
+            attendee.event = None
+            attendee.save()
+        else:
+            messages.warning(request, f"You haven't joined {event.title} yet.")
+            return redirect('events:feed')
+        messages.success(request, f'You have left {event.title}.')
+        return redirect('events:feed')
+    else:
+        return redirect('events:feed')

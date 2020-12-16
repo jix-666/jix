@@ -13,9 +13,13 @@
                 {% if user.is_authenticated %}
                     {% if not event.user == user %}
                         <a
-                                class="btn btn-primary mr {% if joined %}disabled{% endif %}"
+                                class="btn btn-primary {% if joined %}disabled{% endif %}"
                                 href="{% url 'events:joining_event' event.category event.slug %}"
                         >{% if joined %}Joined{% else %}Join{% endif %}</a>
+                        <a      
+                                class="btn btn-danger {% if not joined %}disabled{% endif %}"
+                                href="{% url 'events:leave_event' event.category event.slug %}"
+                        >Leave</a>
                     {% endif %}
                     <div class="btn-group float-right">
                         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
