@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from datetime import datetime
 
 # Create your models here.
 
@@ -43,6 +44,14 @@ class Event(models.Model):
         self.slug = self.slug or slugify(self.title, allow_unicode=True)
         super().save(*args, **kwargs)
 
+    def is_outdated(self):
+        """Return a boolean representation of outdated Event object. """
+        return self.appointment_date < timezone.now()
+
+    def is_hot(self):
+        """Return a boolean representation of popular Event object"""
+        return self.attendee_set.count() >= 20
+
 
 class Attendee(models.Model):
     """An Attendee model.
@@ -51,7 +60,7 @@ class Attendee(models.Model):
 
     """
 
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              null=True,
                              blank=True,

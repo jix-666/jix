@@ -4,18 +4,24 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-12 col-md-7">
-                <h1>{{ event.title }}</h1>
+                <h1 class="text-break">{{ event.title }}</h1>
+                <h6>Created by <a href="{% url 'users:profile' event.user.username %}">{{ event.user.username }}</a></h6>
+                <h6>Category : <a href="{% url 'events:events_by_category' event.category %}">{{ event.category|capfirst }}</a></h6>
                 <img src="{{ event.image_upload.url }}" alt="{{ event.title }}" style="height: 25vw"
                      class="img-fluid rounded my-4">
-                <p>{{ event.description }}</p>
+                <p class="text-break">{{ event.description }}</p>
                 <p>Created at: {{ event.created_at }}</p>
                 <p>Appointment date: {{ event.appointment_date }}</p>
                 {% if user.is_authenticated %}
                     {% if not event.user == user %}
                         <a
-                                class="btn btn-primary mr {% if joined %}disabled{% endif %}"
+                                class="btn btn-primary {% if joined or event.is_outdated %}disabled{% endif %}"
                                 href="{% url 'events:joining_event' event.category event.slug %}"
                         >{% if joined %}Joined{% else %}Join{% endif %}</a>
+                        <a      
+                                class="btn btn-danger {% if not joined %}disabled{% endif %}"
+                                href="{% url 'events:leave_event' event.category event.slug %}"
+                        >Leave</a>
                     {% endif %}
                     <div class="btn-group float-right">
                         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
