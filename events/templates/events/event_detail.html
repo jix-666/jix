@@ -1,76 +1,65 @@
 {% extends 'events/main.html' %}
 {% block content %}
-    {% load static %}
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-12 col-md-7">
-                <h1>{{ event.title }}</h1>
-                <img src="{{ event.image_upload.url }}" alt="{{ event.title }}" style="height: 25vw"
-                     class="img-fluid rounded my-4">
-                <p>{{ event.description }}</p>
-                <p>Created at: {{ event.created_at }}</p>
-                <p>Appointment date: {{ event.appointment_date }}</p>
-                {% if user.is_authenticated %}
-                    {% if not event.user == user %}
-                        <a
-                                class="btn btn-primary mr {% if joined %}disabled{% endif %}"
-                                href="{% url 'events:joining_event' event.category event.slug %}"
-                        >{% if joined %}Joined{% else %}Join{% endif %}</a>
+{% load static %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 col-md-7">
+            <h1>{{ event.title }}</h1>
+            <h6>Created by <a href="{% url "users:profile" event.user.username %}">{{ event.user.username }}</a></h6>
+            <img src="{{ event.image_upload.url }}" alt="{{ event.title }}" style="height: 25vw"
+                class="img-fluid rounded my-4">
+            <p>{{ event.description }}</p>
+            <p>Created at: {{ event.created_at }}</p>
+            <p>Appointment date: {{ event.appointment_date }}</p>
+            {% if user.is_authenticated %}
+            {% if not event.user == user %}
+            <a class="btn btn-primary mr {% if joined %}disabled{% endif %}"
+                href="{% url 'events:joining_event' event.category event.slug %}">{% if joined %}Joined{% else %}Join{% endif %}</a>
+            {% endif %}
+            <div class="btn-group float-right">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Option
+                </button>
+                <div class="dropdown-menu">
+                    {% if event.user == user or user.is_superuser %}
+                    <a class="dropdown-item" href="{% url 'events:edit_event' event.category event.slug %}">Edit</a>
+                    <a class="dropdown-item" href="{% url 'events:delete_event' event.category event.slug %}">Delete</a>
+                    <div class="dropdown-divider"></div>
                     {% endif %}
-                    <div class="btn-group float-right">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            Option
-                        </button>
-                        <div class="dropdown-menu">
-                            {% if event.user == user or user.is_superuser %}
-                                <a
-                                        class="dropdown-item"
-                                        href="{% url 'events:edit_event' event.category event.slug %}"
-                                >Edit</a>
-                                <a
-                                        class="dropdown-item"
-                                        href="{% url 'events:delete_event' event.category event.slug %}"
-                                >Delete</a>
-                                <div class="dropdown-divider"></div>
-                            {% endif %}
-                            <a
-                                    class="dropdown-item"
-                                    href="{% url 'events:report_event' event.category event.slug %}"
-                            >Report an issue</a>
-                        </div>
-                    </div>
-                {% endif %}
+                    <a class="dropdown-item" href="{% url 'events:report_event' event.category event.slug %}">Report an
+                        issue</a>
+                </div>
             </div>
-            <div class="col-12 col-md-5">
-                <div class="card rounded mt-5">
-                    <div class="card-body overflow-auto" style="height: 50vh">
-                        <h3 class="card-title">Attendees</h3>
-                        {% if event.attendee_set.all %}
-                            <h6 class="card-subtitle mb-3 text-muted">{{ event.attendee_set.count }}
-                                attendee{{ event.attendee_set.count|pluralize }}</h6>
-                            {% for attendee in event.attendee_set.all %}
-                                <div class="user m-3">
-                                    {% if attendee.user.userprofile.profile_picture %}
-                                        <img src="{{ attendee.user.userprofile.profile_picture.url }}"
-                                             alt="{{ attendee.user.username }} image" style="height: 50px;"
-                                             class="mr-2">
-                                    {% else %}
-                                        <img src="{% static 'user-icon.png' %}"
-                                             alt="{{ attendee.user.username }} default image" style="height: 50px;"
-                                             class="mr-2">
-                                    {% endif %}
-                                    <a class="card-text"
-                                       href="{% url 'users:profile' attendee.user.userprofile.user.username %}">{{ attendee.user }}</a>
-                                </div>
-                            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-12 col-md-5">
+            <div class="card rounded mt-5">
+                <div class="card-body overflow-auto" style="height: 50vh">
+                    <h3 class="card-title">Attendees</h3>
+                    {% if event.attendee_set.all %}
+                    <h6 class="card-subtitle mb-3 text-muted">{{ event.attendee_set.count }}
+                        attendee{{ event.attendee_set.count|pluralize }}</h6>
+                    {% for attendee in event.attendee_set.all %}
+                    <div class="user m-3">
+                        {% if attendee.user.userprofile.profile_picture %}
+                        <img src="{{ attendee.user.userprofile.profile_picture.url }}"
+                            alt="{{ attendee.user.username }} image" style="height: 50px;" class="mr-2">
                         {% else %}
-                            <p class="card-text">It seems no one has been joined this event yet.</p>
+                        <img src="{% static 'user-icon.png' %}" alt="{{ attendee.user.username }} default image"
+                            style="height: 50px;" class="mr-2">
                         {% endif %}
+                        <a class="card-text"
+                            href="{% url 'users:profile' attendee.user.userprofile.user.username %}">{{ attendee.user }}</a>
                     </div>
+                    {% endfor %}
+                    {% else %}
+                    <p class="card-text">It seems no one has been joined this event yet.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}
