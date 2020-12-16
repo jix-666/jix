@@ -9,7 +9,7 @@ class JoinEventTests(TestCase):
     """Tests for Joining event."""
 
     def test_single_user_joins_event(self):
-        """If the user joins the event. Username will be shown on attendees. (if there are viewing for their account)."""
+        """If the user joins the event. Username will be shown on attendees."""
         user = User.objects.create_user(username='testuser', password='secret123456')
         user28 = User.objects.create_user(username='testuser28', password='secret123456')
         self.client.post(reverse('login'), {'username': 'testuser',
