@@ -230,6 +230,11 @@ def joining_event(request, event_category, event_slug):
 
 @login_required(login_url='/accounts/login')
 def leave_event(request, event_category, event_slug):
+    """Leave an event.
+
+    Returns:
+    HttpResponseObject -- event feed
+    """
     event = check_event(request, event_category=event_category, event_slug=event_slug)
     if event:
         if event.attendee_set.filter(user=request.user).exists():
