@@ -14,7 +14,7 @@
                 {% if user.is_authenticated %}
                     {% if not event.user == user %}
                         <a
-                                class="btn btn-primary {% if joined %}disabled{% endif %}"
+                                class="btn btn-primary {% if joined or event.is_outdated %}disabled{% endif %}"
                                 href="{% url 'events:joining_event' event.category event.slug %}"
                         >{% if joined %}Joined{% else %}Join{% endif %}</a>
                         <a      

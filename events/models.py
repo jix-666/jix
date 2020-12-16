@@ -43,6 +43,9 @@ class Event(models.Model):
         self.slug = self.slug or slugify(self.title, allow_unicode=True)
         super().save(*args, **kwargs)
 
+    def is_outdated(self):
+        return self.appointment_date < timezone.now()
+
 
 class Attendee(models.Model):
     """An Attendee model.

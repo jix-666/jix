@@ -17,7 +17,13 @@
                     {{ event.title|slice:":33" }}...
                 {% endif %}
             </h5>
-            <small class="card-subtitle text-muted">{{ event.appointment_date|date:"D d M Y" }} {{ event.appointment_date|time:"H:i" }}</small>
+            <small 
+                    class="card-subtitle text-muted"
+            >{% if not event.is_outdated %}
+                {{ event.appointment_date|date:"D d M Y" }} {{ event.appointment_date|time:"H:i" }}
+            {% else %}
+                Expired.
+            {% endif %}</small>
         </div>
     </div>
 </a>
