@@ -89,6 +89,7 @@ Follow these steps
 - [Requirements](../../wiki/Requirements)
 - [Code Review Procedure](../../wiki/Code%20Procedure)
 - [Code Checklist](../../wiki/Code%20Checklist)
+- [Project Presentation Slide](https://bit.ly/3aqZo2e)
 ### Iteration Plan
 - [Iteration 1 Plan](../../wiki/Iteration%201%20Plan)
 - [Iteration 2 Plan](../../wiki/Iteration%202%20Plan)
